@@ -1,0 +1,62 @@
+# Credentials
+credentials.json
+*.json.backup
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files
+temp_img_*
+*.tmp
+
+# Reports (but keep the Reportes folder structure for generated files)
+Reportes/*.pdf
+Reportes/*.csv
+
+# Local development
+.env
+.env.local
+
+# Large local folders (not needed for web deployment)
+0. Presupuestos enviados/
+1.Gafetes_Cuadrilla/
+2. Informacion/
+3. Excel_Principal/
+6. Informacion para Rutas/
+7. Rutas Montadas/
+8. REPORTES/
+10. Administracion/
+4.Qgis/
+Rutas/
+
