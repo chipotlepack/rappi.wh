@@ -209,13 +209,29 @@ def df_to_geojson(df: pd.DataFrame, layer_name: str) -> dict:
                 except (ValueError, TypeError):
                     props[col] = val
 
-        # Agrega "ESTATUS FINAL" en mayúsculas para compatibilidad con el mapa original
+        # Mapea "Estatus Final" del Sheet a los valores que espera el mapa original
+        _STATUS_MAP = {
+            # Valores exactos del Sheet (en minúsculas)
+            "instalada":              "INSTALADA",
+            "requiere contacto":      "REQUIERE CONTACTO",
+            "visitada no instalado":  "VISITADA",   # valor real del sheet
+            "visitada no instalada":  "VISITADA",   # variante
+            "en proceso de visita":   "EN PROCESO",
+            "rechazada":              "NO ACEPTO",
+            "no existe":              "YA NO EXISTE",
+            "pendiente":              "PENDIENTE",
+            # aliases adicionales
+            "en proceso":             "EN PROCESO",
+            "no acepto":              "NO ACEPTO",
+            "ya no existe":           "YA NO EXISTE",
+            "visitada":               "VISITADA",
+        }
         estatus_raw = ""
         for col in df.columns:
             if col.lower() == COL_ESTATUS_FINAL.lower():
-                estatus_raw = str(row.get(col, "") or "").strip().upper()
+                estatus_raw = str(row.get(col, "") or "").strip().lower()
                 break
-        props["ESTATUS FINAL"] = estatus_raw if estatus_raw else None
+        props["ESTATUS FINAL"] = _STATUS_MAP.get(estatus_raw, estatus_raw.upper() if estatus_raw else None)
 
         features.append({
             "type": "Feature",
