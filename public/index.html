@@ -839,12 +839,13 @@
             var total = features.length;
             var installed = 0;
             var counts = {
-                'EN PROCESO': 0,
                 'INSTALADA': 0,
-                'NO ACEPTO': 0,
+                'EN PROCESO': 0,
+                'REQUIERE CONTACTO': 0,
                 'VISITADA': 0,
+                'NO ACEPTO': 0,
                 'YA NO EXISTE': 0,
-                'REQUIERE CONTACTO': 0
+                'PENDIENTE': 0
             };
             features.forEach(function(f) {
                 var s = whStatusKey(f.properties ? f.properties['ESTATUS FINAL'] : '');
@@ -866,9 +867,10 @@
             body.innerHTML =
                 '<div class="wh-stat-top"><div class="wh-big-number">' + summary.total + '</div><div class="wh-sub">' + summary.pct.toFixed(1) + '% instalada</div></div>' +
                 '<div class="wh-progress"><div style="width:' + summary.pct.toFixed(1) + '%"></div></div>' +
-                '<div class="wh-row"><span class="wh-label">Inst.</span><strong>' + summary.counts['INSTALADA'] + '</strong><span class="wh-label">Proceso</span><strong>' + summary.counts['EN PROCESO'] + '</strong></div>' +
-                '<div class="wh-row"><span class="wh-label">Visitada</span><strong>' + summary.counts['VISITADA'] + '</strong><span class="wh-label">No aceptó</span><strong>' + summary.counts['NO ACEPTO'] + '</strong></div>' +
-                '<div class="wh-row"><span class="wh-label">Req. contacto</span><strong>' + summary.counts['REQUIERE CONTACTO'] + '</strong><span class="wh-label">No existe</span><strong>' + summary.counts['YA NO EXISTE'] + '</strong></div>';
+                '<div class="wh-row"><span class="wh-label">Instalada</span><strong>' + summary.counts['INSTALADA'] + '</strong><span class="wh-label">En proceso</span><strong>' + summary.counts['EN PROCESO'] + '</strong></div>' +
+                '<div class="wh-row"><span class="wh-label">Req. contacto</span><strong>' + summary.counts['REQUIERE CONTACTO'] + '</strong><span class="wh-label">Visitada</span><strong>' + summary.counts['VISITADA'] + '</strong></div>' +
+                '<div class="wh-row"><span class="wh-label">Rechazada</span><strong>' + summary.counts['NO ACEPTO'] + '</strong><span class="wh-label">No existe</span><strong>' + summary.counts['YA NO EXISTE'] + '</strong></div>' +
+                '<div class="wh-row"><span class="wh-label">Pendiente</span><strong>' + summary.counts['PENDIENTE'] + '</strong></div>';
         }
         function whInitToggles() {
             document.querySelectorAll('.wh-city-header').forEach(function(header) {
