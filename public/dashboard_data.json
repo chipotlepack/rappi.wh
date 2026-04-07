@@ -1,0 +1,141 @@
+{
+  "actualizado": "2026-04-07T16:11:08.797432",
+  "regiones": {
+    "CDMX": {
+      "total": 20248,
+      "instaladas": 3681,
+      "pct_instalada": 18.2,
+      "por_estatus": {
+        "INSTALADA": 3681,
+        "EN PROCESO": 0,
+        "VISITADA": 0,
+        "NO ACEPTO": 0,
+        "REQUIERE CONTACTO": 1972,
+        "YA NO EXISTE": 0
+      }
+    }
+  },
+  "rutas_activas": [],
+  "comentarios": [
+    {
+      "region": "CDMX",
+      "store_id": "1923328042",
+      "negocio": "Starbucks",
+      "comentario": "No acepta publicidad"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1923771713",
+      "negocio": "Cinépolis Tradicional",
+      "comentario": "Solo se instalo sticker"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1923301926",
+      "negocio": "Cinépolis Tradicional",
+      "comentario": "No permitieron instalación"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1923473073",
+      "negocio": "Esquit3ando",
+      "comentario": "Solo dejaron colocar sticker"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1923720560",
+      "negocio": "KFC",
+      "comentario": "Estaba cerrado"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1923291794",
+      "negocio": "Hooters",
+      "comentario": "Se cambia metalica por pie"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "990008032",
+      "negocio": "Sushi Izakaya",
+      "comentario": "No autorizó el gerente"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1306714739",
+      "negocio": "Cassava Roots",
+      "comentario": "No permitieron instalación"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1930128980",
+      "negocio": "Casa 1900 Pan y Cafe",
+      "comentario": "No permite publicidad"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1923206861",
+      "negocio": "Doneraki Tacos Árabes",
+      "comentario": "No permitieron la instalación"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1923464069",
+      "negocio": "Shake Shack",
+      "comentario": "No permite publicidad"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1923242393",
+      "negocio": "Birria El Compadre",
+      "comentario": "Ya no existe"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1923326585",
+      "negocio": "Lecaroz",
+      "comentario": "Ya ni existe en la ubicacion marcada"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1930222601",
+      "negocio": "Vegan Burger",
+      "comentario": "Ya no existe"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1923272060",
+      "negocio": "El Arroyito II",
+      "comentario": "No permiten la Instalacion "
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1930167144",
+      "negocio": "Subway",
+      "comentario": "No aceptan publicidad"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1930212005",
+      "negocio": "Deigo Ramen",
+      "comentario": "No autorizó el gerente"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "990007591",
+      "negocio": "Pizza Hut",
+      "comentario": "No permiteron instalar "
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1923821427",
+      "negocio": "Oakberry Acai Bowls",
+      "comentario": "Solo quisieron sticker"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1930027347",
+      "negocio": "Pollos Ray",
+      "comentario": "Solo dejaron colocar sticker"
+    }
+  ]
+}
