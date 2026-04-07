@@ -209,6 +209,14 @@ def df_to_geojson(df: pd.DataFrame, layer_name: str) -> dict:
                 except (ValueError, TypeError):
                     props[col] = val
 
+        # Agrega "ESTATUS FINAL" en mayúsculas para compatibilidad con el mapa original
+        estatus_raw = ""
+        for col in df.columns:
+            if col.lower() == COL_ESTATUS_FINAL.lower():
+                estatus_raw = str(row.get(col, "") or "").strip().upper()
+                break
+        props["ESTATUS FINAL"] = estatus_raw if estatus_raw else None
+
         features.append({
             "type": "Feature",
             "properties": props,
