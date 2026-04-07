@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rappi MKT POP 2026 - Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .kpi-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .kpi-card.total {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .kpi-card.instalada {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+        }
+
+        .kpi-card.en-proceso {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .kpi-card.rechazada {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+        }
+
+        .kpi-card.requiere {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            color: white;
+        }
+
+        .kpi-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .kpi-value {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .comments-section {
+            background: #f9f9f9;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        .comments-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .comment-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+            border-radius: 4px;
+        }
+
+        .comment-text {
+            color: #555;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .last-update {
+            text-align: center;
+            padding: 20px;
+            color: #999;
+            font-size: 0.9em;
+            border-top: 1px solid #eee;
+            margin-top: 30px;
+        }
+
+        .error-message {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Rappi MKT POP 2026</h1>
+            <p>Dashboard de Instalaciones - CDMX</p>
+        </div>
+
+        <div class="content">
+            <div id="error-container"></div>
+
+            <!-- KPI Cards -->
+            <div class="kpi-grid">
+                <div class="kpi-card total">
+                    <div class="kpi-label">Total</div>
+                    <div class="kpi-value" id="total">-</div>
+                </div>
+                <div class="kpi-card instalada">
+                    <div class="kpi-label">Instalada</div>
+                    <div class="kpi-value" id="instalada">-</div>
+                </div>
+                <div class="kpi-card en-proceso">
+                    <div class="kpi-label">En Proceso</div>
+                    <div class="kpi-value" id="en-proceso">-</div>
+                </div>
+                <div class="kpi-card rechazada">
+                    <div class="kpi-label">Rechazada</div>
+                    <div class="kpi-value" id="rechazada">-</div>
+                </div>
+                <div class="kpi-card requiere">
+                    <div class="kpi-label">Requiere Contacto</div>
+                    <div class="kpi-value" id="requiere-contacto">-</div>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <div class="chart-title">Distribución de Estatus</div>
+                    <canvas id="statusChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <div class="chart-title">Progreso General</div>
+                    <canvas id="progressChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section" id="comments-section" style="display: none;">
+                <div class="comments-title">📝 Últimos Comentarios</div>
+                <div id="comments-list"></div>
+            </div>
+
+            <div class="last-update">
+                <p>Última actualización: <span id="last-update">Cargando...</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load dashboard data
+        fetch('dashboard_data.json')
+            .then(response => response.json())
+            .then(data => {
+                console.log('Dashboard data loaded:', data);
+                updateDashboard(data);
+            })
+            .catch(error => {
+                console.error('Error loading dashboard data:', error);
+                document.getElementById('error-container').innerHTML =
+                    '<div class="error-message">⚠️ Error cargando datos. Por favor, recarga la página.</div>';
+            });
+
+        function updateDashboard(data) {
+            // Update KPI values
+            const region = data.regiones && data.regiones[0] ? data.regiones[0] : {};
+
+            const total = region.total || 0;
+            const instalada = region.instalada || 0;
+            const enProceso = region.en_proceso || 0;
+            const rechazada = region.rechazada || 0;
+            const requiereContacto = region.requiere_contacto || 0;
+
+            document.getElementById('total').textContent = total.toLocaleString('es-MX');
+            document.getElementById('instalada').textContent = instalada.toLocaleString('es-MX');
+            document.getElementById('en-proceso').textContent = enProceso.toLocaleString('es-MX');
+            document.getElementById('rechazada').textContent = rechazada.toLocaleString('es-MX');
+            document.getElementById('requiere-contacto').textContent = requiereContacto.toLocaleString('es-MX');
+
+            // Update charts
+            createStatusChart(instalada, enProceso, rechazada, requiereContacto);
+            createProgressChart(instalada, total);
+
+            // Update last update time
+            document.getElementById('last-update').textContent = new Date().toLocaleString('es-MX');
+
+            // Update comments
+            if (data.comentarios && data.comentarios.length > 0) {
+                document.getElementById('comments-section').style.display = 'block';
+                const commentsList = document.getElementById('comments-list');
+                commentsList.innerHTML = data.comentarios.slice(0, 10).map(comment =>
+                    `<div class="comment-item"><div class="comment-text">${comment}</div></div>`
+                ).join('');
+            }
+        }
+
+        function createStatusChart(instalada, enProceso, rechazada, requiereContacto) {
+            const ctx = document.getElementById('statusChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Instalada', 'En Proceso', 'Rechazada', 'Requiere Contacto'],
+                    datasets: [{
+                        data: [instalada, enProceso, rechazada, requiereContacto],
+                        backgroundColor: [
+                            '#38ef7d',
+                            '#f5576c',
+                            '#fee140',
+                            '#30cfd0'
+                        ],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        }
+
+        function createProgressChart(instalada, total) {
+            const percentage = total > 0 ? Math.round((instalada / total) * 100) : 0;
+            const remaining = total - instalada;
+
+            const ctx = document.getElementById('progressChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Completado', 'Pendiente'],
+                    datasets: [{
+                        data: [instalada, remaining],
+                        backgroundColor: [
+                            '#667eea',
+                            '#e0e0e0'
+                        ],
+                        borderColor: '#fff',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.parsed + ' (' +
+                                           Math.round((context.parsed / total) * 100) + '%)';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
