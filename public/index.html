@@ -248,7 +248,7 @@
         }
         var map = L.map('map', {
             zoomControl:false, maxZoom:28, minZoom:1
-        }).fitBounds([[20.59230059398561,-103.43733533611305],[20.650010187074425,-103.32963675765947]]);
+        }).fitBounds([[14.5,-117.1],[32.7,-86.7]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
         var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
@@ -377,13 +377,11 @@
         map.addLayer(layer_OSMStandard_0);
         function pop_CDMX_PROCESOOINSTALADAS_1(feature, layer) {
             var popupContent = buildPopupTable(feature, [
-                {key: 'NOMBRE DEL LOCAL', label: 'Nombre del local'},
+                {key: 'Nombre de Local', label: 'Nombre del local'},
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
-                {key: 'DIRECCIÓN', label: 'Dirección'},
-                {key: 'LÍDER', label: 'Cuadrilla / responsable'},
-                {key: 'MATERIAL POP', label: 'Material POP'},
-                {key: 'FOTO TESTIGO', label: 'Evidencia'},
-                {key: 'STORE ID', label: 'ID interno'}
+                {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
+                {key: 'Fecha de visita/Implementación', label: 'Fecha implementación'},
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
@@ -487,6 +485,38 @@
                 interactive: true,
             }
                     break;
+                case 'PENDIENTE':
+                    return {
+                pane: 'pane_CDMX_PROCESOOINSTALADAS_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(180,0,0,1.0)',
+                interactive: true,
+            }
+                    break;
+                default:
+                    return {
+                pane: 'pane_CDMX_PROCESOOINSTALADAS_1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 0.5,
+                fillColor: 'rgba(150,150,150,1.0)',
+                interactive: true,
+            }
+                    break;
             }
         }
         map.createPane('pane_CDMX_PROCESOOINSTALADAS_1');
@@ -518,12 +548,11 @@
         cluster_CDMX_PROCESOOINSTALADAS_1.addTo(map);
         function pop_NORTH_POP_WH_MTY_2(feature, layer) {
             var popupContent = buildPopupTable(feature, [
-                {key: 'NOMBRE DEL LOCAL', label: 'Nombre del local'},
+                {key: 'Nombre de Local', label: 'Nombre del local'},
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
-                {key: 'DIRECCIÓN', label: 'Dirección'},
-                {key: 'LÍDER', label: 'Cuadrilla / responsable'},
-                {key: 'FOTO TESTIGO', label: 'Evidencia'},
-                {key: 'STORE ID', label: 'ID interno'}
+                {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
+                {key: 'Fecha de visita/Implementación', label: 'Fecha implementación'},
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
@@ -594,12 +623,11 @@
         cluster_NORTH_POP_WH_MTY_2.addTo(map);
         function pop_WEST_POP_GDL_WH_3(feature, layer) {
             var popupContent = buildPopupTable(feature, [
-                {key: 'NOMBRE DEL LOCAL', label: 'Nombre del local'},
+                {key: 'Nombre de Local', label: 'Nombre del local'},
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
-                {key: 'DIRECCIÓN', label: 'Dirección'},
-                {key: 'LÍDER', label: 'Cuadrilla / responsable'},
-                {key: 'FOTO TESTIGO', label: 'Evidencia'},
-                {key: 'STORE ID', label: 'ID interno'}
+                {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
+                {key: 'Fecha de visita/Implementación', label: 'Fecha implementación'},
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
@@ -738,9 +766,9 @@
             }
         });
         var overlaysTree = [
-            {label: 'WEST_POP_GDL_WH<br /><table><tr><td style="text-align: center;"><img src="legend/WEST_POP_GDL_WH_3_ENPROCESO0.png" /></td><td>EN PROCESO</td></tr><tr><td style="text-align: center;"><img src="legend/WEST_POP_GDL_WH_3_REQUIERECONTACTO1.png" /></td><td>REQUIERE CONTACTO</td></tr><tr><td style="text-align: center;"><img src="legend/WEST_POP_GDL_WH_3_YANOEXISTE2.png" /></td><td>YA NO EXISTE</td></tr></table>', layer: cluster_WEST_POP_GDL_WH_3},
-            {label: 'NORTH_POP_WH_MTY<br /><table><tr><td style="text-align: center;"><img src="legend/NORTH_POP_WH_MTY_2_ENPROCESO0.png" /></td><td>EN PROCESO</td></tr><tr><td style="text-align: center;"><img src="legend/NORTH_POP_WH_MTY_2_1.png" /></td><td></td></tr></table>', layer: cluster_NORTH_POP_WH_MTY_2},
-            {label: 'CDMX_PROCESO O INSTALADAS<br /><table><tr><td style="text-align: center;"><img src="legend/CDMX_PROCESOOINSTALADAS_1_ENPROCESO0.png" /></td><td>EN PROCESO</td></tr><tr><td style="text-align: center;"><img src="legend/CDMX_PROCESOOINSTALADAS_1_INSTALADA1.png" /></td><td>INSTALADA</td></tr><tr><td style="text-align: center;"><img src="legend/CDMX_PROCESOOINSTALADAS_1_NOACEPTO2.png" /></td><td>NO ACEPTO</td></tr><tr><td style="text-align: center;"><img src="legend/CDMX_PROCESOOINSTALADAS_1_VISITADA3.png" /></td><td>VISITADA</td></tr><tr><td style="text-align: center;"><img src="legend/CDMX_PROCESOOINSTALADAS_1_YANOEXISTE4.png" /></td><td>YA NO EXISTE</td></tr><tr><td style="text-align: center;"><img src="legend/CDMX_PROCESOOINSTALADAS_1_REQUIERECONTACTO5.png" /></td><td>REQUIERE CONTACTO</td></tr></table>', layer: cluster_CDMX_PROCESOOINSTALADAS_1},
+            {label: 'WEST_POP_GDL_WH<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_WEST_POP_GDL_WH_3},
+            {label: 'NORTH_POP_WH_MTY<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_NORTH_POP_WH_MTY_2},
+            {label: 'CDMX_PROCESO O INSTALADAS<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_CDMX_PROCESOOINSTALADAS_1},
             {label: "OSM Standard", layer: layer_OSMStandard_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
@@ -858,6 +886,23 @@
         whRender('wh-city-mty', whSummarize(json_NORTH_POP_WH_MTY_2));
         whRender('wh-city-gdl', whSummarize(json_WEST_POP_GDL_WH_3));
         whInitToggles();
+
+        // Click en cabecera de ciudad → zoom a esa capa
+        document.getElementById('wh-city-cdmx').querySelector('.wh-city-header').addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (cluster_CDMX_PROCESOOINSTALADAS_1.getBounds().isValid())
+                map.flyToBounds(cluster_CDMX_PROCESOOINSTALADAS_1.getBounds(), {padding: [40,40], duration: 1.2});
+        });
+        document.getElementById('wh-city-mty').querySelector('.wh-city-header').addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (cluster_NORTH_POP_WH_MTY_2.getBounds().isValid())
+                map.flyToBounds(cluster_NORTH_POP_WH_MTY_2.getBounds(), {padding: [40,40], duration: 1.2});
+        });
+        document.getElementById('wh-city-gdl').querySelector('.wh-city-header').addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (cluster_WEST_POP_GDL_WH_3.getBounds().isValid())
+                map.flyToBounds(cluster_WEST_POP_GDL_WH_3.getBounds(), {padding: [40,40], duration: 1.2});
+        });
 
         setBounds();
         </script>        
