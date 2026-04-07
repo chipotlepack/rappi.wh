@@ -1,58 +1,74 @@
 @echo off
+chcp 65001 >nul
 :: ============================================================
 ::  sync_rappi.bat — Sincroniza Rappi MKT POP 2026
-::  - Actualiza mapas (JS GeoJSON)
-::  - Genera reportes PDF
-::  Puedes programar este archivo en el Programador de Tareas
+::  1. Lee Google Sheets → genera JS del mapa
+::  2. Copia datos al folder public/
+::  3. Git commit + push → Cloudflare redeploya automáticamente
+::  Programar en Task Scheduler para ejecución diaria
 :: ============================================================
 cd /d "%~dp0"
 
+set LOG_FILE=%~dp0Reportes\sync_log.txt
+echo. >> "%LOG_FILE%"
+echo ============================================================ >> "%LOG_FILE%"
+echo   Sync iniciado: %date% %time% >> "%LOG_FILE%"
+echo ============================================================ >> "%LOG_FILE%"
+
 echo.
 echo ============================================================
-echo   Rappi MKT POP — Sincronización Completa
+echo   Rappi MKT POP ^| Sincronización Automática
+echo   %date% %time%
 echo ============================================================
 echo.
 
-:: Verifica que Python esté instalado
+:: ── PASO 1: Verificar Python ────────────────────────────────
 python --version >nul 2>&1
 if errorlevel 1 (
+    echo ERROR: Python no encontrado >> "%LOG_FILE%"
     echo ERROR: Python no encontrado. Instálalo desde python.org
-    pause
     exit /b 1
 )
 
-:: Instala dependencias si no están
-echo [1/3] Verificando dependencias...
-python -m pip install -q -r requirements.txt
-
-:: Sincroniza mapas (genera JS)
-echo.
-echo [2/3] Sincronizando datos del mapa...
-python rappi_sync.py
+:: ── PASO 2: Sincronizar datos del mapa ──────────────────────
+echo [1/3] Sincronizando Google Sheets → mapa...
+python rappi_sync.py >> "%LOG_FILE%" 2>&1
 
 if errorlevel 1 (
-    echo.
-    echo ERROR: La sincronización falló. Revisa el log arriba.
-    pause
+    echo ERROR: rappi_sync.py falló. Revisa %LOG_FILE% >> "%LOG_FILE%"
+    echo ERROR: La sincronización falló. Revisa el log:
+    echo   %LOG_FILE%
     exit /b 1
 )
+echo   OK - Mapa actualizado
 
-:: Genera reporte diario
-echo.
-echo [3/3] Generando reporte del día...
-python rappi_reports.py
+:: ── PASO 3: Copiar dashboard_data.json a public/ ────────────
+echo [2/3] Actualizando datos del dashboard...
+copy /Y "Reportes\dashboard_data.json" "public\dashboard_data.json" >nul 2>&1
+if errorlevel 1 (
+    echo ADVERTENCIA: No se pudo copiar dashboard_data.json >> "%LOG_FILE%"
+) else (
+    echo   OK - Dashboard data actualizado
+)
+
+:: ── PASO 4: Git commit y push → Cloudflare redeploya ────────
+echo [3/3] Subiendo cambios a GitHub...
+git add public\data\CDMX_PROCESOOINSTALADAS_1.js public\dashboard_data.json >> "%LOG_FILE%" 2>&1
+git commit -m "Auto-sync: %date% %time%" >> "%LOG_FILE%" 2>&1
+git push origin master >> "%LOG_FILE%" 2>&1
+
+if errorlevel 1 (
+    echo ADVERTENCIA: Git push falló. Revisa conexión a internet. >> "%LOG_FILE%"
+    echo ADVERTENCIA: Git push falló. El mapa no se actualizó en línea.
+) else (
+    echo   OK - Cloudflare redesplegando (2-3 min)
+    echo   OK - Git push exitoso >> "%LOG_FILE%"
+)
 
 echo.
 echo ============================================================
-echo   ✓ Sincronización Completa
+echo   Sincronización completa: %date% %time%
+echo   Log: Reportes\sync_log.txt
 echo ============================================================
-echo.
-echo   Archivos generados:
-echo   - Mapa JS: 4.Qgis\Carpeta Mapa WEB\...\data\CDMX_PROCESOOINSTALADAS_1.js
-echo   - Reportes: Reportes\rappi_reporte_diario_YYYYMMDD_HHMM.pdf
-echo   - Dashboard: Reportes\dashboard.html
-echo   - CSV: Reportes\rappi_reporte_YYYYMMDD_HHMM.csv
-echo.
-echo   Próximo: Sube los archivos JS a tu servidor (Cloudflare)
-echo.
-pause
+echo. >> "%LOG_FILE%"
+echo Sync completado: %date% %time% >> "%LOG_FILE%"
