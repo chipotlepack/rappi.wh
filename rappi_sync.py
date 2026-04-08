@@ -283,10 +283,15 @@ def generate_csv_report(all_data: dict):
 
     full_df = pd.concat(frames, ignore_index=True)
 
-    # CSV completo
+    # CSV con nombre fijo (para QGIS y herramientas externas)
+    csv_fixed = OUTPUT_REPORT_DIR / "rappi_reporte.csv"
+    full_df.to_csv(csv_fixed, index=False, encoding="utf-8-sig")
+    print(f"    ✓  CSV fijo para QGIS: {csv_fixed.name}")
+
+    # CSV con timestamp (histórico)
     csv_path = OUTPUT_REPORT_DIR / f"rappi_reporte_{ts}.csv"
     full_df.to_csv(csv_path, index=False, encoding="utf-8-sig")
-    print(f"    ✓  CSV completo: {csv_path.name}")
+    print(f"    ✓  CSV histórico: {csv_path.name}")
 
     # Resumen por estatus y región
     if "ESTATUS FINAL" in full_df.columns:
@@ -295,9 +300,15 @@ def generate_csv_report(all_data: dict):
             .size()
             .reset_index(name="TOTAL")
         )
+        # Resumen con nombre fijo
+        summary_fixed = OUTPUT_REPORT_DIR / "rappi_resumen.csv"
+        summary.to_csv(summary_fixed, index=False, encoding="utf-8-sig")
+        print(f"    ✓  Resumen fijo: {summary_fixed.name}")
+
+        # Resumen histórico
         summary_path = OUTPUT_REPORT_DIR / f"rappi_resumen_{ts}.csv"
         summary.to_csv(summary_path, index=False, encoding="utf-8-sig")
-        print(f"    ✓  Resumen por estatus: {summary_path.name}")
+        print(f"    ✓  Resumen histórico: {summary_path.name}")
 
         # Imprime tabla rápida en consola
         print("\n  ── Resumen de estatus ──────────────────────")
