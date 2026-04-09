@@ -209,6 +209,42 @@
                 <div class="wh-city-header"><span>GDL</span><button class="wh-city-toggle" type="button">+</button></div>
                 <div class="wh-city-body"></div>
             </div>
+            <div class="wh-city minimized" id="wh-city-pue">
+                <div class="wh-city-header"><span>PUE</span><button class="wh-city-toggle" type="button">+</button></div>
+                <div class="wh-city-body"></div>
+            </div>
+            <div class="wh-city minimized" id="wh-city-mer">
+                <div class="wh-city-header"><span>MER</span><button class="wh-city-toggle" type="button">+</button></div>
+                <div class="wh-city-body"></div>
+            </div>
+            <div class="wh-city minimized" id="wh-city-qro">
+                <div class="wh-city-header"><span>QRO</span><button class="wh-city-toggle" type="button">+</button></div>
+                <div class="wh-city-body"></div>
+            </div>
+            <div class="wh-city minimized" id="wh-city-ver">
+                <div class="wh-city-header"><span>VER</span><button class="wh-city-toggle" type="button">+</button></div>
+                <div class="wh-city-body"></div>
+            </div>
+            <div class="wh-city minimized" id="wh-city-cue">
+                <div class="wh-city-header"><span>CUE</span><button class="wh-city-toggle" type="button">+</button></div>
+                <div class="wh-city-body"></div>
+            </div>
+            <div class="wh-city minimized" id="wh-city-can">
+                <div class="wh-city-header"><span>CAN</span><button class="wh-city-toggle" type="button">+</button></div>
+                <div class="wh-city-body"></div>
+            </div>
+            <div class="wh-city minimized" id="wh-city-pac">
+                <div class="wh-city-header"><span>PAC</span><button class="wh-city-toggle" type="button">+</button></div>
+                <div class="wh-city-body"></div>
+            </div>
+            <div class="wh-city minimized" id="wh-city-xal">
+                <div class="wh-city-header"><span>XAL</span><button class="wh-city-toggle" type="button">+</button></div>
+                <div class="wh-city-body"></div>
+            </div>
+            <div class="wh-city minimized" id="wh-city-pdc">
+                <div class="wh-city-header"><span>PDC</span><button class="wh-city-toggle" type="button">+</button></div>
+                <div class="wh-city-body"></div>
+            </div>
         </div>
 
         </div>
@@ -229,6 +265,15 @@
         <script src="data/CDMX_PROCESOOINSTALADAS_1.js"></script>
         <script src="data/NORTH_POP_WH_MTY_2.js"></script>
         <script src="data/WEST_POP_GDL_WH_3.js"></script>
+        <script src="data/PUE_POP_WH.js"></script>
+        <script src="data/MER_POP_WH.js"></script>
+        <script src="data/QRO_POP_WH.js"></script>
+        <script src="data/VER_POP_WH.js"></script>
+        <script src="data/CUE_POP_WH.js"></script>
+        <script src="data/CAN_POP_WH.js"></script>
+        <script src="data/PAC_POP_WH.js"></script>
+        <script src="data/XAL_POP_WH.js"></script>
+        <script src="data/PDC_POP_WH.js"></script>
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -683,6 +728,403 @@
 
         bounds_group.addLayer(layer_WEST_POP_GDL_WH_3);
         cluster_WEST_POP_GDL_WH_3.addTo(map);
+
+        function pop_PUE_POP_WH(feature, layer) {
+            var popupContent = buildPopupTable(feature, [
+                {key: 'Store Name', label: 'Nombre del local'},
+                {key: 'ESTATUS FINAL', label: 'Estatus final'},
+                {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
+                {key: 'Fechas de visita', label: 'Fecha visita'},
+                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+            ]);
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+            bindPersistentPopup(layer, content);
+        }
+        function style_PUE_POP_WH_0(feature) {
+            var _base = {pane: 'pane_PUE_POP_WH', radius: 4.0, opacity: 1,
+                color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
+            switch(String(feature.properties['ESTATUS FINAL'])) {
+                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
+                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
+                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
+                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
+                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
+                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
+                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+            }
+        }
+        map.createPane('pane_PUE_POP_WH');
+        map.getPane('pane_PUE_POP_WH').style.zIndex = 404;
+        map.getPane('pane_PUE_POP_WH').style['mix-blend-mode'] = 'normal';
+        var layer_PUE_POP_WH = new L.geoJson(json_PUE_POP_WH, {
+            attribution: '', interactive: true,
+            dataVar: 'json_PUE_POP_WH', layerName: 'layer_PUE_POP_WH',
+            pane: 'pane_PUE_POP_WH', onEachFeature: pop_PUE_POP_WH,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, style_PUE_POP_WH_0(feature));
+            },
+        });
+        var cluster_PUE_POP_WH = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2, maxClusterRadius: 30,
+            disableClusteringAtZoom: 14, iconCreateFunction: createProgressClusterIcon});
+        cluster_PUE_POP_WH.addLayer(layer_PUE_POP_WH);
+        bounds_group.addLayer(layer_PUE_POP_WH);
+        cluster_PUE_POP_WH.addTo(map);
+
+        function pop_MER_POP_WH(feature, layer) {
+            var popupContent = buildPopupTable(feature, [
+                {key: 'Store Name', label: 'Nombre del local'},
+                {key: 'ESTATUS FINAL', label: 'Estatus final'},
+                {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
+                {key: 'Fechas de visita', label: 'Fecha visita'},
+                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+            ]);
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+            bindPersistentPopup(layer, content);
+        }
+        function style_MER_POP_WH_0(feature) {
+            var _base = {pane: 'pane_MER_POP_WH', radius: 4.0, opacity: 1,
+                color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
+            switch(String(feature.properties['ESTATUS FINAL'])) {
+                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
+                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
+                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
+                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
+                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
+                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
+                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+            }
+        }
+        map.createPane('pane_MER_POP_WH');
+        map.getPane('pane_MER_POP_WH').style.zIndex = 405;
+        map.getPane('pane_MER_POP_WH').style['mix-blend-mode'] = 'normal';
+        var layer_MER_POP_WH = new L.geoJson(json_MER_POP_WH, {
+            attribution: '', interactive: true,
+            dataVar: 'json_MER_POP_WH', layerName: 'layer_MER_POP_WH',
+            pane: 'pane_MER_POP_WH', onEachFeature: pop_MER_POP_WH,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, style_MER_POP_WH_0(feature));
+            },
+        });
+        var cluster_MER_POP_WH = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2, maxClusterRadius: 30,
+            disableClusteringAtZoom: 14, iconCreateFunction: createProgressClusterIcon});
+        cluster_MER_POP_WH.addLayer(layer_MER_POP_WH);
+        bounds_group.addLayer(layer_MER_POP_WH);
+        cluster_MER_POP_WH.addTo(map);
+
+        function pop_QRO_POP_WH(feature, layer) {
+            var popupContent = buildPopupTable(feature, [
+                {key: 'Store Name', label: 'Nombre del local'},
+                {key: 'ESTATUS FINAL', label: 'Estatus final'},
+                {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
+                {key: 'Fechas de visita', label: 'Fecha visita'},
+                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+            ]);
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+            bindPersistentPopup(layer, content);
+        }
+        function style_QRO_POP_WH_0(feature) {
+            var _base = {pane: 'pane_QRO_POP_WH', radius: 4.0, opacity: 1,
+                color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
+            switch(String(feature.properties['ESTATUS FINAL'])) {
+                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
+                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
+                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
+                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
+                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
+                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
+                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+            }
+        }
+        map.createPane('pane_QRO_POP_WH');
+        map.getPane('pane_QRO_POP_WH').style.zIndex = 406;
+        map.getPane('pane_QRO_POP_WH').style['mix-blend-mode'] = 'normal';
+        var layer_QRO_POP_WH = new L.geoJson(json_QRO_POP_WH, {
+            attribution: '', interactive: true,
+            dataVar: 'json_QRO_POP_WH', layerName: 'layer_QRO_POP_WH',
+            pane: 'pane_QRO_POP_WH', onEachFeature: pop_QRO_POP_WH,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, style_QRO_POP_WH_0(feature));
+            },
+        });
+        var cluster_QRO_POP_WH = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2, maxClusterRadius: 30,
+            disableClusteringAtZoom: 14, iconCreateFunction: createProgressClusterIcon});
+        cluster_QRO_POP_WH.addLayer(layer_QRO_POP_WH);
+        bounds_group.addLayer(layer_QRO_POP_WH);
+        cluster_QRO_POP_WH.addTo(map);
+
+        function pop_VER_POP_WH(feature, layer) {
+            var popupContent = buildPopupTable(feature, [
+                {key: 'Store Name', label: 'Nombre del local'},
+                {key: 'ESTATUS FINAL', label: 'Estatus final'},
+                {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
+                {key: 'Fechas de visita', label: 'Fecha visita'},
+                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+            ]);
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+            bindPersistentPopup(layer, content);
+        }
+        function style_VER_POP_WH_0(feature) {
+            var _base = {pane: 'pane_VER_POP_WH', radius: 4.0, opacity: 1,
+                color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
+            switch(String(feature.properties['ESTATUS FINAL'])) {
+                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
+                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
+                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
+                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
+                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
+                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
+                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+            }
+        }
+        map.createPane('pane_VER_POP_WH');
+        map.getPane('pane_VER_POP_WH').style.zIndex = 407;
+        map.getPane('pane_VER_POP_WH').style['mix-blend-mode'] = 'normal';
+        var layer_VER_POP_WH = new L.geoJson(json_VER_POP_WH, {
+            attribution: '', interactive: true,
+            dataVar: 'json_VER_POP_WH', layerName: 'layer_VER_POP_WH',
+            pane: 'pane_VER_POP_WH', onEachFeature: pop_VER_POP_WH,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, style_VER_POP_WH_0(feature));
+            },
+        });
+        var cluster_VER_POP_WH = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2, maxClusterRadius: 30,
+            disableClusteringAtZoom: 14, iconCreateFunction: createProgressClusterIcon});
+        cluster_VER_POP_WH.addLayer(layer_VER_POP_WH);
+        bounds_group.addLayer(layer_VER_POP_WH);
+        cluster_VER_POP_WH.addTo(map);
+
+        function pop_CUE_POP_WH(feature, layer) {
+            var popupContent = buildPopupTable(feature, [
+                {key: 'Store Name', label: 'Nombre del local'},
+                {key: 'ESTATUS FINAL', label: 'Estatus final'},
+                {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
+                {key: 'Fechas de visita', label: 'Fecha visita'},
+                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+            ]);
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+            bindPersistentPopup(layer, content);
+        }
+        function style_CUE_POP_WH_0(feature) {
+            var _base = {pane: 'pane_CUE_POP_WH', radius: 4.0, opacity: 1,
+                color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
+            switch(String(feature.properties['ESTATUS FINAL'])) {
+                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
+                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
+                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
+                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
+                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
+                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
+                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+            }
+        }
+        map.createPane('pane_CUE_POP_WH');
+        map.getPane('pane_CUE_POP_WH').style.zIndex = 408;
+        map.getPane('pane_CUE_POP_WH').style['mix-blend-mode'] = 'normal';
+        var layer_CUE_POP_WH = new L.geoJson(json_CUE_POP_WH, {
+            attribution: '', interactive: true,
+            dataVar: 'json_CUE_POP_WH', layerName: 'layer_CUE_POP_WH',
+            pane: 'pane_CUE_POP_WH', onEachFeature: pop_CUE_POP_WH,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, style_CUE_POP_WH_0(feature));
+            },
+        });
+        var cluster_CUE_POP_WH = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2, maxClusterRadius: 30,
+            disableClusteringAtZoom: 14, iconCreateFunction: createProgressClusterIcon});
+        cluster_CUE_POP_WH.addLayer(layer_CUE_POP_WH);
+        bounds_group.addLayer(layer_CUE_POP_WH);
+        cluster_CUE_POP_WH.addTo(map);
+
+        function pop_CAN_POP_WH(feature, layer) {
+            var popupContent = buildPopupTable(feature, [
+                {key: 'Store Name', label: 'Nombre del local'},
+                {key: 'ESTATUS FINAL', label: 'Estatus final'},
+                {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
+                {key: 'Fechas de visita', label: 'Fecha visita'},
+                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+            ]);
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+            bindPersistentPopup(layer, content);
+        }
+        function style_CAN_POP_WH_0(feature) {
+            var _base = {pane: 'pane_CAN_POP_WH', radius: 4.0, opacity: 1,
+                color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
+            switch(String(feature.properties['ESTATUS FINAL'])) {
+                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
+                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
+                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
+                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
+                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
+                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
+                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+            }
+        }
+        map.createPane('pane_CAN_POP_WH');
+        map.getPane('pane_CAN_POP_WH').style.zIndex = 409;
+        map.getPane('pane_CAN_POP_WH').style['mix-blend-mode'] = 'normal';
+        var layer_CAN_POP_WH = new L.geoJson(json_CAN_POP_WH, {
+            attribution: '', interactive: true,
+            dataVar: 'json_CAN_POP_WH', layerName: 'layer_CAN_POP_WH',
+            pane: 'pane_CAN_POP_WH', onEachFeature: pop_CAN_POP_WH,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, style_CAN_POP_WH_0(feature));
+            },
+        });
+        var cluster_CAN_POP_WH = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2, maxClusterRadius: 30,
+            disableClusteringAtZoom: 14, iconCreateFunction: createProgressClusterIcon});
+        cluster_CAN_POP_WH.addLayer(layer_CAN_POP_WH);
+        bounds_group.addLayer(layer_CAN_POP_WH);
+        cluster_CAN_POP_WH.addTo(map);
+
+        function pop_PAC_POP_WH(feature, layer) {
+            var popupContent = buildPopupTable(feature, [
+                {key: 'Store Name', label: 'Nombre del local'},
+                {key: 'ESTATUS FINAL', label: 'Estatus final'},
+                {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
+                {key: 'Fechas de visita', label: 'Fecha visita'},
+                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+            ]);
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+            bindPersistentPopup(layer, content);
+        }
+        function style_PAC_POP_WH_0(feature) {
+            var _base = {pane: 'pane_PAC_POP_WH', radius: 4.0, opacity: 1,
+                color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
+            switch(String(feature.properties['ESTATUS FINAL'])) {
+                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
+                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
+                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
+                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
+                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
+                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
+                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+            }
+        }
+        map.createPane('pane_PAC_POP_WH');
+        map.getPane('pane_PAC_POP_WH').style.zIndex = 410;
+        map.getPane('pane_PAC_POP_WH').style['mix-blend-mode'] = 'normal';
+        var layer_PAC_POP_WH = new L.geoJson(json_PAC_POP_WH, {
+            attribution: '', interactive: true,
+            dataVar: 'json_PAC_POP_WH', layerName: 'layer_PAC_POP_WH',
+            pane: 'pane_PAC_POP_WH', onEachFeature: pop_PAC_POP_WH,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, style_PAC_POP_WH_0(feature));
+            },
+        });
+        var cluster_PAC_POP_WH = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2, maxClusterRadius: 30,
+            disableClusteringAtZoom: 14, iconCreateFunction: createProgressClusterIcon});
+        cluster_PAC_POP_WH.addLayer(layer_PAC_POP_WH);
+        bounds_group.addLayer(layer_PAC_POP_WH);
+        cluster_PAC_POP_WH.addTo(map);
+
+        function pop_XAL_POP_WH(feature, layer) {
+            var popupContent = buildPopupTable(feature, [
+                {key: 'Store Name', label: 'Nombre del local'},
+                {key: 'ESTATUS FINAL', label: 'Estatus final'},
+                {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
+                {key: 'Fechas de visita', label: 'Fecha visita'},
+                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+            ]);
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+            bindPersistentPopup(layer, content);
+        }
+        function style_XAL_POP_WH_0(feature) {
+            var _base = {pane: 'pane_XAL_POP_WH', radius: 4.0, opacity: 1,
+                color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
+            switch(String(feature.properties['ESTATUS FINAL'])) {
+                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
+                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
+                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
+                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
+                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
+                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
+                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+            }
+        }
+        map.createPane('pane_XAL_POP_WH');
+        map.getPane('pane_XAL_POP_WH').style.zIndex = 411;
+        map.getPane('pane_XAL_POP_WH').style['mix-blend-mode'] = 'normal';
+        var layer_XAL_POP_WH = new L.geoJson(json_XAL_POP_WH, {
+            attribution: '', interactive: true,
+            dataVar: 'json_XAL_POP_WH', layerName: 'layer_XAL_POP_WH',
+            pane: 'pane_XAL_POP_WH', onEachFeature: pop_XAL_POP_WH,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, style_XAL_POP_WH_0(feature));
+            },
+        });
+        var cluster_XAL_POP_WH = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2, maxClusterRadius: 30,
+            disableClusteringAtZoom: 14, iconCreateFunction: createProgressClusterIcon});
+        cluster_XAL_POP_WH.addLayer(layer_XAL_POP_WH);
+        bounds_group.addLayer(layer_XAL_POP_WH);
+        cluster_XAL_POP_WH.addTo(map);
+
+        function pop_PDC_POP_WH(feature, layer) {
+            var popupContent = buildPopupTable(feature, [
+                {key: 'Store Name', label: 'Nombre del local'},
+                {key: 'ESTATUS FINAL', label: 'Estatus final'},
+                {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
+                {key: 'Fechas de visita', label: 'Fecha visita'},
+                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+            ]);
+            var content = removeEmptyRowsFromPopupContent(popupContent, feature);
+            bindPersistentPopup(layer, content);
+        }
+        function style_PDC_POP_WH_0(feature) {
+            var _base = {pane: 'pane_PDC_POP_WH', radius: 4.0, opacity: 1,
+                color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
+            switch(String(feature.properties['ESTATUS FINAL'])) {
+                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
+                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
+                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
+                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
+                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
+                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
+                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
+            }
+        }
+        map.createPane('pane_PDC_POP_WH');
+        map.getPane('pane_PDC_POP_WH').style.zIndex = 412;
+        map.getPane('pane_PDC_POP_WH').style['mix-blend-mode'] = 'normal';
+        var layer_PDC_POP_WH = new L.geoJson(json_PDC_POP_WH, {
+            attribution: '', interactive: true,
+            dataVar: 'json_PDC_POP_WH', layerName: 'layer_PDC_POP_WH',
+            pane: 'pane_PDC_POP_WH', onEachFeature: pop_PDC_POP_WH,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, style_PDC_POP_WH_0(feature));
+            },
+        });
+        var cluster_PDC_POP_WH = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2, maxClusterRadius: 30,
+            disableClusteringAtZoom: 14, iconCreateFunction: createProgressClusterIcon});
+        cluster_PDC_POP_WH.addLayer(layer_PDC_POP_WH);
+        bounds_group.addLayer(layer_PDC_POP_WH);
+        cluster_PDC_POP_WH.addTo(map);
+
         const url = {"Nominatim OSM": "https://nominatim.openstreetmap.org/search?format=geojson&addressdetails=1&",
         "France BAN": "https://api-adresse.data.gouv.fr/search/?"}
         var photonControl = L.control.photon({
@@ -858,6 +1300,15 @@
         whRender('wh-city-cdmx', whSummarize(json_CDMX_PROCESOOINSTALADAS_1));
         whRender('wh-city-mty', whSummarize(json_NORTH_POP_WH_MTY_2));
         whRender('wh-city-gdl', whSummarize(json_WEST_POP_GDL_WH_3));
+        whRender('wh-city-pue', whSummarize(json_PUE_POP_WH));
+        whRender('wh-city-mer', whSummarize(json_MER_POP_WH));
+        whRender('wh-city-qro', whSummarize(json_QRO_POP_WH));
+        whRender('wh-city-ver', whSummarize(json_VER_POP_WH));
+        whRender('wh-city-cue', whSummarize(json_CUE_POP_WH));
+        whRender('wh-city-can', whSummarize(json_CAN_POP_WH));
+        whRender('wh-city-pac', whSummarize(json_PAC_POP_WH));
+        whRender('wh-city-xal', whSummarize(json_XAL_POP_WH));
+        whRender('wh-city-pdc', whSummarize(json_PDC_POP_WH));
         whInitToggles();
 
         // Click en cabecera de ciudad → zoom a esa capa
@@ -875,6 +1326,51 @@
             e.stopPropagation();
             if (cluster_WEST_POP_GDL_WH_3.getBounds().isValid())
                 map.flyToBounds(cluster_WEST_POP_GDL_WH_3.getBounds(), {padding: [40,40], duration: 1.2});
+        });
+        document.getElementById('wh-city-pue').querySelector('.wh-city-header').addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (cluster_PUE_POP_WH.getBounds().isValid())
+                map.flyToBounds(cluster_PUE_POP_WH.getBounds(), {padding: [40,40], duration: 1.2});
+        });
+        document.getElementById('wh-city-mer').querySelector('.wh-city-header').addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (cluster_MER_POP_WH.getBounds().isValid())
+                map.flyToBounds(cluster_MER_POP_WH.getBounds(), {padding: [40,40], duration: 1.2});
+        });
+        document.getElementById('wh-city-qro').querySelector('.wh-city-header').addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (cluster_QRO_POP_WH.getBounds().isValid())
+                map.flyToBounds(cluster_QRO_POP_WH.getBounds(), {padding: [40,40], duration: 1.2});
+        });
+        document.getElementById('wh-city-ver').querySelector('.wh-city-header').addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (cluster_VER_POP_WH.getBounds().isValid())
+                map.flyToBounds(cluster_VER_POP_WH.getBounds(), {padding: [40,40], duration: 1.2});
+        });
+        document.getElementById('wh-city-cue').querySelector('.wh-city-header').addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (cluster_CUE_POP_WH.getBounds().isValid())
+                map.flyToBounds(cluster_CUE_POP_WH.getBounds(), {padding: [40,40], duration: 1.2});
+        });
+        document.getElementById('wh-city-can').querySelector('.wh-city-header').addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (cluster_CAN_POP_WH.getBounds().isValid())
+                map.flyToBounds(cluster_CAN_POP_WH.getBounds(), {padding: [40,40], duration: 1.2});
+        });
+        document.getElementById('wh-city-pac').querySelector('.wh-city-header').addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (cluster_PAC_POP_WH.getBounds().isValid())
+                map.flyToBounds(cluster_PAC_POP_WH.getBounds(), {padding: [40,40], duration: 1.2});
+        });
+        document.getElementById('wh-city-xal').querySelector('.wh-city-header').addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (cluster_XAL_POP_WH.getBounds().isValid())
+                map.flyToBounds(cluster_XAL_POP_WH.getBounds(), {padding: [40,40], duration: 1.2});
+        });
+        document.getElementById('wh-city-pdc').querySelector('.wh-city-header').addEventListener('dblclick', function(e) {
+            e.stopPropagation();
+            if (cluster_PDC_POP_WH.getBounds().isValid())
+                map.flyToBounds(cluster_PDC_POP_WH.getBounds(), {padding: [40,40], duration: 1.2});
         });
 
         setBounds();
