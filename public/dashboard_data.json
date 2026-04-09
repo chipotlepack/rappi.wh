@@ -1,141 +1,272 @@
 {
-  "actualizado": "2026-04-07T16:46:34.615606",
+  "actualizado": "2026-04-09T13:27:18.575819",
   "regiones": {
     "CDMX": {
-      "total": 20248,
-      "instaladas": 3681,
-      "pct_instalada": 18.2,
+      "total": 20152,
+      "instaladas": 3833,
+      "pct_instalada": 19.0,
       "por_estatus": {
-        "INSTALADA": 3681,
-        "EN PROCESO": 0,
-        "VISITADA": 0,
-        "NO ACEPTO": 0,
-        "REQUIERE CONTACTO": 1972,
-        "YA NO EXISTE": 0
+        "PENDIENTE": 11582,
+        "INSTALADA": 3833,
+        "REQUIERE CONTACTO": 1950,
+        "NO ACEPTO": 1604,
+        "YA NO EXISTE": 588,
+        "VISITADA": 512,
+        "EN PROCESO": 83
+      }
+    },
+    "GDL": {
+      "total": 9321,
+      "instaladas": 1352,
+      "pct_instalada": 14.5,
+      "por_estatus": {
+        "PENDIENTE": 7095,
+        "INSTALADA": 1352,
+        "REQUIERE CONTACTO": 659,
+        "NO ACEPTO": 215
       }
     }
   },
-  "rutas_activas": [],
   "comentarios": [
     {
       "region": "CDMX",
-      "store_id": "1923328042",
-      "negocio": "Starbucks",
-      "comentario": "No acepta publicidad"
+      "store_id": "1923811824",
+      "negocio": "El Globo",
+      "comentario": "No tienen permitido colocar stoppers"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1930222684",
+      "negocio": "89 Reposteria",
+      "comentario": "Imposible contacto"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1923227421",
+      "negocio": "El Camarón Guasaveño",
+      "comentario": "cglomasverdes@gmail.com Pendiente confirmación del gerente"
     },
     {
       "region": "CDMX",
       "store_id": "1923771713",
       "negocio": "Cinépolis Tradicional",
-      "comentario": "Solo se instalo sticker"
+      "comentario": "El sticker debe ponerse en la caja dónde entregan delivery, arriba del counter que tiene el aliado."
     },
     {
       "region": "CDMX",
       "store_id": "1923301926",
       "negocio": "Cinépolis Tradicional",
-      "comentario": "No permitieron instalación"
+      "comentario": "El sticker debe ponerse en la caja dónde entregan delivery, arriba del counter que tiene el aliado."
     },
     {
       "region": "CDMX",
-      "store_id": "1923473073",
-      "negocio": "Esquit3ando",
-      "comentario": "Solo dejaron colocar sticker"
+      "store_id": "1923218520",
+      "negocio": "Los Tulipanes",
+      "comentario": "El aliado me comenta que por el momento no quiere meter promocion visual en las sucursales (es el dueño)"
     },
     {
       "region": "CDMX",
-      "store_id": "1923720560",
-      "negocio": "KFC",
-      "comentario": "Estaba cerrado"
+      "store_id": "1930199530",
+      "negocio": "Bura Cookies",
+      "comentario": "no responde"
     },
     {
       "region": "CDMX",
       "store_id": "1923291794",
       "negocio": "Hooters",
-      "comentario": "Se cambia metalica por pie"
+      "comentario": "ya está avisado el aliado, les dejo este archivo con los telefonos de los gerentes para cualquier duda, necesitan marcarle un dia antes para confirmar el acceso y el horario https://docs.google.com/spreadsheets/d/1zVdPjN89S92jKD3dq_EbSCShSONHoPXh/edit?usp=sharing&ouid=108693814355153298938&rtpof=true&sd=true"
+    },
+    {
+      "region": "CDMX",
+      "store_id": "1306705850",
+      "negocio": "Cielito Querido Café",
+      "comentario": "por contrato, esperando que material entregar "
     },
     {
       "region": "CDMX",
       "store_id": "990008032",
       "negocio": "Sushi Izakaya",
-      "comentario": "No autorizó el gerente"
+      "comentario": "No se puede colocar por politicas internas de la marca"
     },
     {
       "region": "CDMX",
-      "store_id": "1306714739",
-      "negocio": "Cassava Roots",
-      "comentario": "No permitieron instalación"
+      "store_id": "1923221415",
+      "negocio": "Taqueria El Tizoncito",
+      "comentario": "Anteriormente ya se ha puesto comunicación de Rappi en sucursales de Tizoncito, por el momento no quieren meter publicidad"
     },
     {
       "region": "CDMX",
-      "store_id": "1930128980",
-      "negocio": "Casa 1900 Pan y Cafe",
-      "comentario": "No permite publicidad"
+      "store_id": "990002366",
+      "negocio": "Pane Envía",
+      "comentario": "Comenta que solo aceptaria si su marca esta en el mismo material "
     },
     {
       "region": "CDMX",
-      "store_id": "1923206861",
-      "negocio": "Doneraki Tacos Árabes",
-      "comentario": "No permitieron la instalación"
+      "store_id": "900001156",
+      "negocio": "Sushi Shop Teikit",
+      "comentario": "Por politicas de la marca, no dejan poner ningun stopper de ninguna marca."
     },
     {
       "region": "CDMX",
-      "store_id": "1923464069",
-      "negocio": "Shake Shack",
-      "comentario": "No permite publicidad"
+      "store_id": "1923222313",
+      "negocio": "Sushi Roll",
+      "comentario": "En proceso de autorización"
     },
     {
       "region": "CDMX",
-      "store_id": "1923242393",
-      "negocio": "Birria El Compadre",
-      "comentario": "Ya no existe"
+      "store_id": "1306706884",
+      "negocio": "Tandoor",
+      "comentario": "Cero contacto. "
     },
     {
       "region": "CDMX",
-      "store_id": "1923326585",
-      "negocio": "Lecaroz",
-      "comentario": "Ya ni existe en la ubicacion marcada"
+      "store_id": "990006274",
+      "negocio": "Lucky Sushi",
+      "comentario": "Por politicas de la marca, no dejan poner ningun stopper de ninguna marca."
     },
     {
       "region": "CDMX",
-      "store_id": "1930222601",
-      "negocio": "Vegan Burger",
-      "comentario": "Ya no existe"
+      "store_id": "1923682043",
+      "negocio": "Sushi Shop Teikit",
+      "comentario": "Por politicas de la marca, no dejan poner ningun stopper de ninguna marca."
     },
     {
       "region": "CDMX",
-      "store_id": "1923272060",
-      "negocio": "El Arroyito II",
-      "comentario": "No permiten la Instalacion "
+      "store_id": "1923208003",
+      "negocio": "Sushiitto",
+      "comentario": "No tienen permitido colocar stoppers"
     },
     {
       "region": "CDMX",
-      "store_id": "1930167144",
-      "negocio": "Subway",
-      "comentario": "No aceptan publicidad"
+      "store_id": "1923270287",
+      "negocio": "Sushi Roll",
+      "comentario": "En proceso de autorización"
     },
     {
       "region": "CDMX",
-      "store_id": "1930212005",
-      "negocio": "Deigo Ramen",
-      "comentario": "No autorizó el gerente"
+      "store_id": "1923221098",
+      "negocio": "Doña Lula",
+      "comentario": "Imposible Contacto"
     },
     {
-      "region": "CDMX",
-      "store_id": "990007591",
-      "negocio": "Pizza Hut",
-      "comentario": "No permiteron instalar "
+      "region": "GDL",
+      "store_id": "1930053391",
+      "negocio": "Burger Chicken",
+      "comentario": "p"
     },
     {
-      "region": "CDMX",
-      "store_id": "1923821427",
-      "negocio": "Oakberry Acai Bowls",
-      "comentario": "Solo quisieron sticker"
+      "region": "GDL",
+      "store_id": "990006378",
+      "negocio": "Chendo y Chon - Plan de San Luis",
+      "comentario": "p"
     },
     {
-      "region": "CDMX",
-      "store_id": "1930027347",
-      "negocio": "Pollos Ray",
-      "comentario": "Solo dejaron colocar sticker"
+      "region": "GDL",
+      "store_id": "1923229330",
+      "negocio": "Choclo Maíz Cocina Vegana",
+      "comentario": "p"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1923217538",
+      "negocio": "Cru Wine & Deli",
+      "comentario": "p"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1930224291",
+      "negocio": "Dogo Go Select",
+      "comentario": "p"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1930270535",
+      "negocio": "Dogo Go Select Providencia",
+      "comentario": "p"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1930223939",
+      "negocio": "Dogo Go!",
+      "comentario": "p"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1930043902",
+      "negocio": "Don Zarandeado Mariscos y Grill Naranjo 1951",
+      "comentario": "p"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1930075257",
+      "negocio": "El Gallinero Tortas Ahogadas",
+      "comentario": "p"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1923244579",
+      "negocio": "Fonda Del Queso - Villa de los Belenes",
+      "comentario": "p"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1930267667",
+      "negocio": "Genki Poke - Chapultepec",
+      "comentario": "https://drive.google.com/file/d/1y1SlyfQ20ZFLo7QHHL69vrVMGaosRO6O/view?usp=sharing"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1923463147",
+      "negocio": "Genki Poke - Circunvalación",
+      "comentario": "https://drive.google.com/file/d/1y1SlyfQ20ZFLo7QHHL69vrVMGaosRO6O/view?usp=sharing"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1930117210",
+      "negocio": "Genki Poke - Circunvalación - Turbo",
+      "comentario": "https://drive.google.com/file/d/1y1SlyfQ20ZFLo7QHHL69vrVMGaosRO6O/view?usp=sharing"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1930261207",
+      "negocio": "Genki Poke - Jardines la Paz",
+      "comentario": "https://drive.google.com/file/d/1y1SlyfQ20ZFLo7QHHL69vrVMGaosRO6O/view?usp=sharing"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1923463148",
+      "negocio": "Genki Poke - La Calma",
+      "comentario": "https://drive.google.com/file/d/1y1SlyfQ20ZFLo7QHHL69vrVMGaosRO6O/view?usp=sharing"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1923463146",
+      "negocio": "Genki Poke - La Estancia",
+      "comentario": "https://drive.google.com/file/d/1y1SlyfQ20ZFLo7QHHL69vrVMGaosRO6O/view?usp=sharing"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1930239160",
+      "negocio": "Genki Poke - la Perla",
+      "comentario": "https://drive.google.com/file/d/1y1SlyfQ20ZFLo7QHHL69vrVMGaosRO6O/view?usp=sharing"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1930253352",
+      "negocio": "Genki Poke - Minerva",
+      "comentario": "https://drive.google.com/file/d/1y1SlyfQ20ZFLo7QHHL69vrVMGaosRO6O/view?usp=sharing"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1923463145",
+      "negocio": "Genki Poke - Nueva Galicia",
+      "comentario": "https://drive.google.com/file/d/1y1SlyfQ20ZFLo7QHHL69vrVMGaosRO6O/view?usp=sharing"
+    },
+    {
+      "region": "GDL",
+      "store_id": "1923463144",
+      "negocio": "Genki Poke - Providencia",
+      "comentario": "https://drive.google.com/file/d/1y1SlyfQ20ZFLo7QHHL69vrVMGaosRO6O/view?usp=sharing"
     }
   ]
 }
