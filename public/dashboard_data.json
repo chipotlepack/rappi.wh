@@ -1,16 +1,16 @@
 {
-  "actualizado": "2026-04-09T13:27:18.575819",
+  "actualizado": "2026-04-09T17:27:31.146640",
   "regiones": {
     "CDMX": {
       "total": 20152,
       "instaladas": 3833,
       "pct_instalada": 19.0,
       "por_estatus": {
-        "PENDIENTE": 11582,
+        "PENDIENTE": 11583,
         "INSTALADA": 3833,
         "REQUIERE CONTACTO": 1950,
         "NO ACEPTO": 1604,
-        "YA NO EXISTE": 588,
+        "YA NO EXISTE": 587,
         "VISITADA": 512,
         "EN PROCESO": 83
       }
@@ -24,6 +24,78 @@
         "INSTALADA": 1352,
         "REQUIERE CONTACTO": 659,
         "NO ACEPTO": 215
+      }
+    },
+    "PUE": {
+      "total": 3705,
+      "instaladas": 0,
+      "pct_instalada": 0.0,
+      "por_estatus": {
+        "PENDIENTE": 3705
+      }
+    },
+    "MER": {
+      "total": 2587,
+      "instaladas": 0,
+      "pct_instalada": 0.0,
+      "por_estatus": {
+        "PENDIENTE": 2587
+      }
+    },
+    "QRO": {
+      "total": 2682,
+      "instaladas": 0,
+      "pct_instalada": 0.0,
+      "por_estatus": {
+        "PENDIENTE": 2682
+      }
+    },
+    "VER": {
+      "total": 931,
+      "instaladas": 0,
+      "pct_instalada": 0.0,
+      "por_estatus": {
+        "PENDIENTE": 931
+      }
+    },
+    "CUE": {
+      "total": 860,
+      "instaladas": 0,
+      "pct_instalada": 0.0,
+      "por_estatus": {
+        "PENDIENTE": 860
+      }
+    },
+    "CAN": {
+      "total": 1131,
+      "instaladas": 0,
+      "pct_instalada": 0.0,
+      "por_estatus": {
+        "PENDIENTE": 1131
+      }
+    },
+    "PAC": {
+      "total": 768,
+      "instaladas": 0,
+      "pct_instalada": 0.0,
+      "por_estatus": {
+        "PENDIENTE": 768
+      }
+    },
+    "XAL": {
+      "total": 579,
+      "instaladas": 0,
+      "pct_instalada": 0.0,
+      "por_estatus": {
+        "PENDIENTE": 579
+      }
+    },
+    "PDC": {
+      "total": 536,
+      "instaladas": 0,
+      "pct_instalada": 0.0,
+      "por_estatus": {
+        "PENDIENTE": 536
       }
     }
   },
@@ -267,6 +339,66 @@
       "store_id": "1923463144",
       "negocio": "Genki Poke - Providencia",
       "comentario": "https://drive.google.com/file/d/1y1SlyfQ20ZFLo7QHHL69vrVMGaosRO6O/view?usp=sharing"
+    },
+    {
+      "region": "PUE",
+      "store_id": "1923291798",
+      "negocio": "Hooters l Puebla",
+      "comentario": "avisar 4 dias antes al menos y el acceso puede ser en horarios nocturnos "
+    },
+    {
+      "region": "PUE",
+      "store_id": "1930112193",
+      "negocio": "Sushi Izakaya - Puebla",
+      "comentario": "por definir"
+    },
+    {
+      "region": "PUE",
+      "store_id": "1923798758",
+      "negocio": "Wok + Wok",
+      "comentario": "Eva Manzo"
+    },
+    {
+      "region": "PUE",
+      "store_id": "1923799787",
+      "negocio": "Taquería la Oriental",
+      "comentario": "Imposible contacto se deja mensaje "
+    },
+    {
+      "region": "PUE",
+      "store_id": "1930376943",
+      "negocio": "Gato Glotón",
+      "comentario": "en conversacion "
+    },
+    {
+      "region": "PUE",
+      "store_id": "1930379214",
+      "negocio": "el Sazón de Las Abuelitas",
+      "comentario": "no hay comunicacion con el encargado"
+    },
+    {
+      "region": "PUE",
+      "store_id": "1930380218",
+      "negocio": "Sugar Pop Cakery",
+      "comentario": "no esta interesado"
+    },
+    {
+      "region": "PUE",
+      "store_id": "1930312674",
+      "negocio": "Desayunos y Comidas Don Barbas",
+      "comentario": "Imposible contacto "
+    },
+    {
+      "region": "PUE",
+      "store_id": "1923327998",
+      "negocio": "Rosies Burger Suc La Paz",
+      "comentario": "sergio"
+    },
+    {
+      "region": "PUE",
+      "store_id": "1923465390",
+      "negocio": "la Memela Dorada",
+      "comentario": "orli"
     }
   ]
 }
