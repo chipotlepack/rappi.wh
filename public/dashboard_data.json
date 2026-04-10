@@ -1,17 +1,17 @@
 {
-  "actualizado": "2026-04-10T11:26:10.800489",
+  "actualizado": "2026-04-10T13:27:43.025366",
   "regiones": {
     "CDMX": {
       "total": 20152,
       "instaladas": 3905,
       "pct_instalada": 19.4,
       "por_estatus": {
-        "PENDIENTE": 11455,
+        "PENDIENTE": 10877,
         "INSTALADA": 3905,
         "NO ACEPTO": 2569,
         "REQUIERE CONTACTO": 1948,
+        "EN PROCESO": 658,
         "YA NO EXISTE": 183,
-        "EN PROCESO": 80,
         "VISITADA": 12
       }
     },
@@ -31,9 +31,9 @@
       "instaladas": 81,
       "pct_instalada": 2.2,
       "por_estatus": {
-        "PENDIENTE": 3563,
+        "PENDIENTE": 3560,
         "INSTALADA": 81,
-        "NO ACEPTO": 61
+        "NO ACEPTO": 64
       }
     },
     "MER": {
@@ -67,7 +67,8 @@
       "instaladas": 0,
       "pct_instalada": 0.0,
       "por_estatus": {
-        "PENDIENTE": 860
+        "PENDIENTE": 852,
+        "NO ACEPTO": 8
       }
     },
     "CAN": {
@@ -83,7 +84,8 @@
       "instaladas": 0,
       "pct_instalada": 0.0,
       "por_estatus": {
-        "PENDIENTE": 768
+        "PENDIENTE": 764,
+        "NO ACEPTO": 4
       }
     },
     "XAL": {
