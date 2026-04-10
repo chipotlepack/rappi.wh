@@ -70,7 +70,21 @@
             display: block;
         }
         .popup-link {
+            display: inline-block;
+            margin-top: 4px;
+            padding: 4px 14px;
+            background: #EE6123;
+            color: #fff !important;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 12px;
+            text-decoration: none !important;
             word-break: break-word;
+            cursor: pointer;
+        }
+        .popup-link:hover {
+            background: #c94e0e;
+            color: #fff !important;
         }
         
         .wh-panel {
@@ -328,7 +342,7 @@
                 return '<a href="' + safe + '" target="_blank" rel="noopener noreferrer"><img class="popup-thumb" src="' + safe + '" alt="Evidencia" /></a>';
             }
             if (isUrl) {
-                return '<a class="popup-link" href="' + safe + '" target="_blank" rel="noopener noreferrer">Ver evidencia</a>';
+                return '<a class="popup-link" href="' + safe + '" target="_blank" rel="noopener noreferrer">&#128247; Ver foto testigo</a>';
             }
             return autolinker.link(safe);
         }
