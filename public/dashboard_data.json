@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-04-10T13:27:43.025366",
+  "actualizado": "2026-04-10T17:28:27.784837",
   "regiones": {
     "CDMX": {
       "total": 20152,
@@ -16,42 +16,43 @@
       }
     },
     "GDL": {
-      "total": 9321,
-      "instaladas": 1463,
+      "total": 9320,
+      "instaladas": 1462,
       "pct_instalada": 15.7,
       "por_estatus": {
         "PENDIENTE": 6924,
-        "INSTALADA": 1463,
+        "INSTALADA": 1462,
         "REQUIERE CONTACTO": 648,
         "NO ACEPTO": 286
       }
     },
     "PUE": {
       "total": 3705,
-      "instaladas": 81,
-      "pct_instalada": 2.2,
+      "instaladas": 447,
+      "pct_instalada": 12.1,
       "por_estatus": {
-        "PENDIENTE": 3560,
-        "INSTALADA": 81,
+        "PENDIENTE": 3194,
+        "INSTALADA": 447,
         "NO ACEPTO": 64
       }
     },
     "MER": {
-      "total": 2587,
-      "instaladas": 330,
-      "pct_instalada": 12.8,
+      "total": 2578,
+      "instaladas": 325,
+      "pct_instalada": 12.6,
       "por_estatus": {
-        "PENDIENTE": 2192,
-        "INSTALADA": 330,
-        "NO ACEPTO": 65
+        "PENDIENTE": 2189,
+        "INSTALADA": 325,
+        "NO ACEPTO": 64
       }
     },
     "QRO": {
-      "total": 2682,
-      "instaladas": 0,
-      "pct_instalada": 0.0,
+      "total": 2678,
+      "instaladas": 442,
+      "pct_instalada": 16.5,
       "por_estatus": {
-        "PENDIENTE": 2682
+        "PENDIENTE": 2236,
+        "INSTALADA": 442
       }
     },
     "VER": {
@@ -64,19 +65,21 @@
     },
     "CUE": {
       "total": 860,
-      "instaladas": 0,
-      "pct_instalada": 0.0,
+      "instaladas": 1,
+      "pct_instalada": 0.1,
       "por_estatus": {
-        "PENDIENTE": 852,
-        "NO ACEPTO": 8
+        "PENDIENTE": 851,
+        "NO ACEPTO": 8,
+        "INSTALADA": 1
       }
     },
     "CAN": {
-      "total": 1131,
-      "instaladas": 0,
-      "pct_instalada": 0.0,
+      "total": 1124,
+      "instaladas": 119,
+      "pct_instalada": 10.6,
       "por_estatus": {
-        "PENDIENTE": 1131
+        "PENDIENTE": 1005,
+        "INSTALADA": 119
       }
     },
     "PAC": {
@@ -90,18 +93,19 @@
     },
     "XAL": {
       "total": 579,
-      "instaladas": 0,
-      "pct_instalada": 0.0,
+      "instaladas": 1,
+      "pct_instalada": 0.2,
       "por_estatus": {
-        "PENDIENTE": 579
+        "PENDIENTE": 578,
+        "INSTALADA": 1
       }
     },
     "PDC": {
-      "total": 536,
+      "total": 535,
       "instaladas": 0,
       "pct_instalada": 0.0,
       "por_estatus": {
-        "PENDIENTE": 536
+        "PENDIENTE": 535
       }
     }
   },
