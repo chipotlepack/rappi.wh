@@ -1,45 +1,49 @@
 {
-  "actualizado": "2026-04-09T17:27:31.146640",
+  "actualizado": "2026-04-10T11:26:10.800489",
   "regiones": {
     "CDMX": {
       "total": 20152,
-      "instaladas": 3833,
-      "pct_instalada": 19.0,
+      "instaladas": 3905,
+      "pct_instalada": 19.4,
       "por_estatus": {
-        "PENDIENTE": 11583,
-        "INSTALADA": 3833,
-        "REQUIERE CONTACTO": 1950,
-        "NO ACEPTO": 1604,
-        "YA NO EXISTE": 587,
-        "VISITADA": 512,
-        "EN PROCESO": 83
+        "PENDIENTE": 11455,
+        "INSTALADA": 3905,
+        "NO ACEPTO": 2569,
+        "REQUIERE CONTACTO": 1948,
+        "YA NO EXISTE": 183,
+        "EN PROCESO": 80,
+        "VISITADA": 12
       }
     },
     "GDL": {
       "total": 9321,
-      "instaladas": 1352,
-      "pct_instalada": 14.5,
+      "instaladas": 1463,
+      "pct_instalada": 15.7,
       "por_estatus": {
-        "PENDIENTE": 7095,
-        "INSTALADA": 1352,
-        "REQUIERE CONTACTO": 659,
-        "NO ACEPTO": 215
+        "PENDIENTE": 6924,
+        "INSTALADA": 1463,
+        "REQUIERE CONTACTO": 648,
+        "NO ACEPTO": 286
       }
     },
     "PUE": {
       "total": 3705,
-      "instaladas": 0,
-      "pct_instalada": 0.0,
+      "instaladas": 81,
+      "pct_instalada": 2.2,
       "por_estatus": {
-        "PENDIENTE": 3705
+        "PENDIENTE": 3563,
+        "INSTALADA": 81,
+        "NO ACEPTO": 61
       }
     },
     "MER": {
       "total": 2587,
-      "instaladas": 0,
-      "pct_instalada": 0.0,
+      "instaladas": 330,
+      "pct_instalada": 12.8,
       "por_estatus": {
-        "PENDIENTE": 2587
+        "PENDIENTE": 2192,
+        "INSTALADA": 330,
+        "NO ACEPTO": 65
       }
     },
     "QRO": {
