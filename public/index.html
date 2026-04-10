@@ -335,6 +335,8 @@
         function formatPopupValue(rawValue) {
             if (rawValue === null || rawValue === undefined || rawValue === '') return '';
             var value = String(rawValue).trim();
+            // Ignorar errores de formula de Google Sheets
+            if (/^#(N\/A|REF!|VALUE!|DIV\/0!|NAME\?|NULL!|NUM!|ERROR!)$/.test(value)) return '';
             var safe = escapeHtml(value);
             var isUrl = /^https?:\/\//i.test(value);
             var isImage = /\.(jpg|jpeg|png|gif|bmp|webp|avif)(\?.*)?$/i.test(value);
@@ -686,7 +688,7 @@
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
                 {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
                 {key: 'Fecha de visita/Implementación', label: 'Fecha implementación'},
-                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
@@ -749,7 +751,7 @@
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
                 {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
                 {key: 'Fechas de visita', label: 'Fecha visita'},
-                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
@@ -793,7 +795,7 @@
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
                 {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
                 {key: 'Fechas de visita', label: 'Fecha visita'},
-                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
@@ -837,7 +839,7 @@
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
                 {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
                 {key: 'Fechas de visita', label: 'Fecha visita'},
-                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
@@ -881,7 +883,7 @@
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
                 {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
                 {key: 'Fechas de visita', label: 'Fecha visita'},
-                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
@@ -925,7 +927,7 @@
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
                 {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
                 {key: 'Fechas de visita', label: 'Fecha visita'},
-                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
@@ -969,7 +971,7 @@
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
                 {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
                 {key: 'Fechas de visita', label: 'Fecha visita'},
-                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
@@ -1013,7 +1015,7 @@
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
                 {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
                 {key: 'Fechas de visita', label: 'Fecha visita'},
-                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
@@ -1057,7 +1059,7 @@
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
                 {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
                 {key: 'Fechas de visita', label: 'Fecha visita'},
-                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
@@ -1101,7 +1103,7 @@
                 {key: 'ESTATUS FINAL', label: 'Estatus final'},
                 {key: 'Direccion (Local/Negocio)', label: 'Dirección'},
                 {key: 'Fechas de visita', label: 'Fecha visita'},
-                {key: 'FOTO_TESTIGO', label: 'Foto testigo'}
+                {key: 'Testigo (Agencia Link)', label: 'Foto testigo'}
             ]);
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
             bindPersistentPopup(layer, content);
