@@ -486,13 +486,39 @@
             if (installedPct <= 75) return 'cluster-yellow';
             return 'cluster-green';
         }
+        // ── Normalización de estatus a 5 categorías ──
+        function whNormStatus(raw) {
+            var s = String(raw || '').trim().toUpperCase();
+            switch(s) {
+                case 'INSTALADA': return 'INSTALADA';
+                case 'RECHAZADA': case 'NO ACEPTO': case 'YA NO EXISTE':
+                case 'NO EXISTE': case 'VISITADA NO INSTALADO':
+                    return 'RECHAZADA';
+                case 'REQUIERE CONTACTO': return 'REQUIERE CONTACTO';
+                case 'EN PROCESO': case 'EN PROCESO DE VISITA':
+                case 'VISITADA':
+                    return 'EN PROCESO DE VISITA';
+                case 'PENDIENTE': return 'PENDIENTE';
+                default: return 'PENDIENTE';
+            }
+        }
+        function whStatusFillColor(norm) {
+            switch(norm) {
+                case 'INSTALADA':           return 'rgba(85,217,15,1.0)';
+                case 'RECHAZADA':           return 'rgba(170,172,172,1.0)';
+                case 'REQUIERE CONTACTO':   return 'rgba(43,143,214,1.0)';
+                case 'EN PROCESO DE VISITA': return 'rgba(255,127,0,1.0)';
+                case 'PENDIENTE':           return 'rgba(180,0,0,1.0)';
+                default:                    return 'rgba(150,150,150,1.0)';
+            }
+        }
         function createProgressClusterIcon(cluster) {
             var markers = cluster.getAllChildMarkers();
             var total = markers.length || 1;
             var installed = 0;
             for (var i = 0; i < markers.length; i++) {
                 var props = markers[i].feature && markers[i].feature.properties ? markers[i].feature.properties : {};
-                if (String(props['ESTATUS FINAL']).trim().toUpperCase() === 'INSTALADA') {
+                if (whNormStatus(props['ESTATUS FINAL'] || props['Estatus Final']) === 'INSTALADA') {
                     installed++;
                 }
             }
@@ -569,136 +595,10 @@
         }
 
         function style_CDMX_PROCESOOINSTALADAS_1_0(feature) {
-            switch(String(feature.properties['ESTATUS FINAL'])) {
-                case 'EN PROCESO':
-                    return {
-                pane: 'pane_CDMX_PROCESOOINSTALADAS_1',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,38,0,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'INSTALADA':
-                    return {
-                pane: 'pane_CDMX_PROCESOOINSTALADAS_1',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(85,217,15,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'NO ACEPTO':
-                    return {
-                pane: 'pane_CDMX_PROCESOOINSTALADAS_1',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,127,0,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'VISITADA':
-                    return {
-                pane: 'pane_CDMX_PROCESOOINSTALADAS_1',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(255,127,0,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'YA NO EXISTE':
-                    return {
-                pane: 'pane_CDMX_PROCESOOINSTALADAS_1',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(170,172,172,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'REQUIERE CONTACTO':
-                    return {
-                pane: 'pane_CDMX_PROCESOOINSTALADAS_1',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(3,59,255,1.0)',
-                interactive: true,
-            }
-                    break;
-                case 'PENDIENTE':
-                    return {
-                pane: 'pane_CDMX_PROCESOOINSTALADAS_1',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(180,0,0,1.0)',
-                interactive: true,
-            }
-                    break;
-                default:
-                    return {
-                pane: 'pane_CDMX_PROCESOOINSTALADAS_1',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 0.5,
-                fillColor: 'rgba(150,150,150,1.0)',
-                interactive: true,
-            }
-                    break;
-            }
+            return {pane: 'pane_CDMX_PROCESOOINSTALADAS_1', radius: 4.0, opacity: 1,
+                color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true,
+                fillColor: whStatusFillColor(whNormStatus(feature.properties['ESTATUS FINAL']))};
         }
         map.createPane('pane_CDMX_PROCESOOINSTALADAS_1');
         map.getPane('pane_CDMX_PROCESOOINSTALADAS_1').style.zIndex = 401;
@@ -740,40 +640,10 @@
         }
 
         function style_NORTH_POP_WH_MTY_2_0(feature) {
-            switch(String(feature.properties['ESTATUS FINAL'])) {
-                case 'EN PROCESO':
-                    return {
-                pane: 'pane_NORTH_POP_WH_MTY_2',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(239,0,0,1.0)',
-                interactive: true,
-            }
-                    break;
-                default:
-                    return {
-                pane: 'pane_NORTH_POP_WH_MTY_2',
-                radius: 4.0,
-                opacity: 1,
-                color: 'rgba(35,35,35,1.0)',
-                dashArray: '',
-                lineCap: 'butt',
-                lineJoin: 'miter',
-                weight: 1,
-                fill: true,
-                fillOpacity: 1,
-                fillColor: 'rgba(227,120,197,1.0)',
-                interactive: true,
-            }
-                    break;
-            }
+            return {pane: 'pane_NORTH_POP_WH_MTY_2', radius: 4.0, opacity: 1,
+                color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true,
+                fillColor: whStatusFillColor(whNormStatus(feature.properties['ESTATUS FINAL']))};
         }
         map.createPane('pane_NORTH_POP_WH_MTY_2');
         map.getPane('pane_NORTH_POP_WH_MTY_2').style.zIndex = 402;
@@ -815,27 +685,10 @@
         }
 
         function style_WEST_POP_GDL_WH_3_0(feature) {
-            var _base = {pane: 'pane_WEST_POP_GDL_WH_3', radius: 4.0, opacity: 1,
+            return {pane: 'pane_WEST_POP_GDL_WH_3', radius: 4.0, opacity: 1,
                 color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
-                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
-            switch(String(feature.properties['ESTATUS FINAL'])) {
-                case 'INSTALADA':
-                    return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
-                case 'EN PROCESO':
-                    return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
-                case 'REQUIERE CONTACTO':
-                    return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
-                case 'VISITADA':
-                    return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
-                case 'NO ACEPTO':
-                    return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
-                case 'YA NO EXISTE':
-                    return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
-                case 'PENDIENTE':
-                    return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-                default:
-                    return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-            }
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true,
+                fillColor: whStatusFillColor(whNormStatus(feature.properties['ESTATUS FINAL']))};
         }
         map.createPane('pane_WEST_POP_GDL_WH_3');
         map.getPane('pane_WEST_POP_GDL_WH_3').style.zIndex = 403;
@@ -877,19 +730,10 @@
             bindPersistentPopup(layer, content);
         }
         function style_PUE_POP_WH_0(feature) {
-            var _base = {pane: 'pane_PUE_POP_WH', radius: 4.0, opacity: 1,
+            return {pane: 'pane_PUE_POP_WH', radius: 4.0, opacity: 1,
                 color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
-                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
-            switch(String(feature.properties['ESTATUS FINAL'])) {
-                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
-                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
-                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
-                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
-                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
-                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
-                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-            }
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true,
+                fillColor: whStatusFillColor(whNormStatus(feature.properties['ESTATUS FINAL']))};
         }
         map.createPane('pane_PUE_POP_WH');
         map.getPane('pane_PUE_POP_WH').style.zIndex = 404;
@@ -921,19 +765,10 @@
             bindPersistentPopup(layer, content);
         }
         function style_MER_POP_WH_0(feature) {
-            var _base = {pane: 'pane_MER_POP_WH', radius: 4.0, opacity: 1,
+            return {pane: 'pane_MER_POP_WH', radius: 4.0, opacity: 1,
                 color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
-                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
-            switch(String(feature.properties['ESTATUS FINAL'])) {
-                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
-                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
-                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
-                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
-                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
-                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
-                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-            }
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true,
+                fillColor: whStatusFillColor(whNormStatus(feature.properties['ESTATUS FINAL']))};
         }
         map.createPane('pane_MER_POP_WH');
         map.getPane('pane_MER_POP_WH').style.zIndex = 405;
@@ -965,19 +800,10 @@
             bindPersistentPopup(layer, content);
         }
         function style_QRO_POP_WH_0(feature) {
-            var _base = {pane: 'pane_QRO_POP_WH', radius: 4.0, opacity: 1,
+            return {pane: 'pane_QRO_POP_WH', radius: 4.0, opacity: 1,
                 color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
-                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
-            switch(String(feature.properties['ESTATUS FINAL'])) {
-                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
-                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
-                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
-                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
-                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
-                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
-                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-            }
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true,
+                fillColor: whStatusFillColor(whNormStatus(feature.properties['ESTATUS FINAL']))};
         }
         map.createPane('pane_QRO_POP_WH');
         map.getPane('pane_QRO_POP_WH').style.zIndex = 406;
@@ -1009,19 +835,10 @@
             bindPersistentPopup(layer, content);
         }
         function style_VER_POP_WH_0(feature) {
-            var _base = {pane: 'pane_VER_POP_WH', radius: 4.0, opacity: 1,
+            return {pane: 'pane_VER_POP_WH', radius: 4.0, opacity: 1,
                 color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
-                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
-            switch(String(feature.properties['ESTATUS FINAL'])) {
-                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
-                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
-                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
-                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
-                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
-                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
-                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-            }
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true,
+                fillColor: whStatusFillColor(whNormStatus(feature.properties['ESTATUS FINAL']))};
         }
         map.createPane('pane_VER_POP_WH');
         map.getPane('pane_VER_POP_WH').style.zIndex = 407;
@@ -1053,19 +870,10 @@
             bindPersistentPopup(layer, content);
         }
         function style_CUE_POP_WH_0(feature) {
-            var _base = {pane: 'pane_CUE_POP_WH', radius: 4.0, opacity: 1,
+            return {pane: 'pane_CUE_POP_WH', radius: 4.0, opacity: 1,
                 color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
-                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
-            switch(String(feature.properties['ESTATUS FINAL'])) {
-                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
-                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
-                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
-                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
-                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
-                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
-                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-            }
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true,
+                fillColor: whStatusFillColor(whNormStatus(feature.properties['ESTATUS FINAL']))};
         }
         map.createPane('pane_CUE_POP_WH');
         map.getPane('pane_CUE_POP_WH').style.zIndex = 408;
@@ -1097,19 +905,10 @@
             bindPersistentPopup(layer, content);
         }
         function style_CAN_POP_WH_0(feature) {
-            var _base = {pane: 'pane_CAN_POP_WH', radius: 4.0, opacity: 1,
+            return {pane: 'pane_CAN_POP_WH', radius: 4.0, opacity: 1,
                 color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
-                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
-            switch(String(feature.properties['ESTATUS FINAL'])) {
-                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
-                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
-                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
-                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
-                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
-                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
-                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-            }
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true,
+                fillColor: whStatusFillColor(whNormStatus(feature.properties['ESTATUS FINAL']))};
         }
         map.createPane('pane_CAN_POP_WH');
         map.getPane('pane_CAN_POP_WH').style.zIndex = 409;
@@ -1141,19 +940,10 @@
             bindPersistentPopup(layer, content);
         }
         function style_PAC_POP_WH_0(feature) {
-            var _base = {pane: 'pane_PAC_POP_WH', radius: 4.0, opacity: 1,
+            return {pane: 'pane_PAC_POP_WH', radius: 4.0, opacity: 1,
                 color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
-                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
-            switch(String(feature.properties['ESTATUS FINAL'])) {
-                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
-                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
-                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
-                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
-                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
-                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
-                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-            }
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true,
+                fillColor: whStatusFillColor(whNormStatus(feature.properties['ESTATUS FINAL']))};
         }
         map.createPane('pane_PAC_POP_WH');
         map.getPane('pane_PAC_POP_WH').style.zIndex = 410;
@@ -1185,19 +975,10 @@
             bindPersistentPopup(layer, content);
         }
         function style_XAL_POP_WH_0(feature) {
-            var _base = {pane: 'pane_XAL_POP_WH', radius: 4.0, opacity: 1,
+            return {pane: 'pane_XAL_POP_WH', radius: 4.0, opacity: 1,
                 color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
-                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
-            switch(String(feature.properties['ESTATUS FINAL'])) {
-                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
-                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
-                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
-                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
-                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
-                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
-                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-            }
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true,
+                fillColor: whStatusFillColor(whNormStatus(feature.properties['ESTATUS FINAL']))};
         }
         map.createPane('pane_XAL_POP_WH');
         map.getPane('pane_XAL_POP_WH').style.zIndex = 411;
@@ -1229,19 +1010,10 @@
             bindPersistentPopup(layer, content);
         }
         function style_PDC_POP_WH_0(feature) {
-            var _base = {pane: 'pane_PDC_POP_WH', radius: 4.0, opacity: 1,
+            return {pane: 'pane_PDC_POP_WH', radius: 4.0, opacity: 1,
                 color: 'rgba(35,35,35,1.0)', dashArray: '', lineCap: 'butt',
-                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true};
-            switch(String(feature.properties['ESTATUS FINAL'])) {
-                case 'INSTALADA': return Object.assign({}, _base, {fillColor: 'rgba(85,217,15,1.0)'});
-                case 'EN PROCESO': return Object.assign({}, _base, {fillColor: 'rgba(228,25,25,1.0)'});
-                case 'REQUIERE CONTACTO': return Object.assign({}, _base, {fillColor: 'rgba(43,143,214,1.0)'});
-                case 'VISITADA': return Object.assign({}, _base, {fillColor: 'rgba(255,127,0,1.0)'});
-                case 'NO ACEPTO': return Object.assign({}, _base, {fillColor: 'rgba(170,172,172,1.0)'});
-                case 'YA NO EXISTE': return Object.assign({}, _base, {fillColor: 'rgba(131,131,131,1.0)'});
-                case 'PENDIENTE': return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-                default: return Object.assign({}, _base, {fillColor: 'rgba(180,0,0,1.0)'});
-            }
+                lineJoin: 'miter', weight: 1, fill: true, fillOpacity: 1, interactive: true,
+                fillColor: whStatusFillColor(whNormStatus(feature.properties['ESTATUS FINAL']))};
         }
         map.createPane('pane_PDC_POP_WH');
         map.getPane('pane_PDC_POP_WH').style.zIndex = 412;
@@ -1314,19 +1086,20 @@
                 last.style.display = "none";
             }
         });
+        var _legendHtml = '<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#2b8fd6;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>EN PROCESO DE VISITA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>';
         var overlaysTree = [
-            {label: 'WEST_POP_GDL_WH<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_WEST_POP_GDL_WH_3},
-            {label: 'NORTH_POP_WH_MTY<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_NORTH_POP_WH_MTY_2},
-            {label: 'CDMX_PROCESO O INSTALADAS<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_CDMX_PROCESOOINSTALADAS_1},
-            {label: 'Puebla<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_PUE_POP_WH},
-            {label: 'M&eacute;rida<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_MER_POP_WH},
-            {label: 'Quer&eacute;taro<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_QRO_POP_WH},
-            {label: 'Veracruz<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_VER_POP_WH},
-            {label: 'Cuernavaca<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_CUE_POP_WH},
-            {label: 'Canc&uacute;n<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_CAN_POP_WH},
-            {label: 'Pachuca<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_PAC_POP_WH},
-            {label: 'Xalapa<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_XAL_POP_WH},
-            {label: 'Playa del Carmen<br /><table><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2600;border:1px solid #222;"></span></td><td>EN PROCESO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#55d90f;border:1px solid #222;"></span></td><td>INSTALADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#033bff;border:1px solid #222;"></span></td><td>REQUIERE CONTACTO</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff7f00;border:1px solid #222;"></span></td><td>VISITADA / RECHAZADA</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#aaacac;border:1px solid #222;"></span></td><td>NO EXISTE</td></tr><tr><td><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:#b40000;border:1px solid #222;"></span></td><td>PENDIENTE</td></tr></table>', layer: cluster_PDC_POP_WH},
+            {label: 'GDL' + _legendHtml, layer: cluster_WEST_POP_GDL_WH_3},
+            {label: 'MTY' + _legendHtml, layer: cluster_NORTH_POP_WH_MTY_2},
+            {label: 'CDMX' + _legendHtml, layer: cluster_CDMX_PROCESOOINSTALADAS_1},
+            {label: 'Puebla' + _legendHtml, layer: cluster_PUE_POP_WH},
+            {label: 'M&eacute;rida' + _legendHtml, layer: cluster_MER_POP_WH},
+            {label: 'Quer&eacute;taro' + _legendHtml, layer: cluster_QRO_POP_WH},
+            {label: 'Veracruz' + _legendHtml, layer: cluster_VER_POP_WH},
+            {label: 'Cuernavaca' + _legendHtml, layer: cluster_CUE_POP_WH},
+            {label: 'Canc&uacute;n' + _legendHtml, layer: cluster_CAN_POP_WH},
+            {label: 'Pachuca' + _legendHtml, layer: cluster_PAC_POP_WH},
+            {label: 'Xalapa' + _legendHtml, layer: cluster_XAL_POP_WH},
+            {label: 'Playa del Carmen' + _legendHtml, layer: cluster_PDC_POP_WH},
             {label: "OSM Standard", layer: layer_OSMStandard_0},]
         var lay = L.control.layers.tree(null, overlaysTree,{
             //namedToggle: true,
@@ -1398,15 +1171,14 @@
             var installed = 0;
             var counts = {
                 'INSTALADA': 0,
-                'EN PROCESO': 0,
+                'RECHAZADA': 0,
                 'REQUIERE CONTACTO': 0,
-                'VISITADA': 0,
-                'NO ACEPTO': 0,
-                'YA NO EXISTE': 0,
+                'EN PROCESO DE VISITA': 0,
                 'PENDIENTE': 0
             };
             features.forEach(function(f) {
-                var s = whStatusKey(f.properties ? f.properties['ESTATUS FINAL'] : '');
+                var raw = f.properties ? (f.properties['ESTATUS FINAL'] || f.properties['Estatus Final'] || '') : '';
+                var s = whNormStatus(raw);
                 if (counts.hasOwnProperty(s)) counts[s] += 1;
                 if (s === 'INSTALADA') installed += 1;
             });
@@ -1425,9 +1197,8 @@
             body.innerHTML =
                 '<div class="wh-stat-top"><div class="wh-big-number">' + summary.total + '</div><div class="wh-sub">' + summary.pct.toFixed(1) + '% instalada</div></div>' +
                 '<div class="wh-progress"><div style="width:' + summary.pct.toFixed(1) + '%"></div></div>' +
-                '<div class="wh-row"><span class="wh-label">Instalada</span><strong>' + summary.counts['INSTALADA'] + '</strong><span class="wh-label">En proceso</span><strong>' + summary.counts['EN PROCESO'] + '</strong></div>' +
-                '<div class="wh-row"><span class="wh-label">Req. contacto</span><strong>' + summary.counts['REQUIERE CONTACTO'] + '</strong><span class="wh-label">Visitada</span><strong>' + summary.counts['VISITADA'] + '</strong></div>' +
-                '<div class="wh-row"><span class="wh-label">Rechazada</span><strong>' + summary.counts['NO ACEPTO'] + '</strong><span class="wh-label">No existe</span><strong>' + summary.counts['YA NO EXISTE'] + '</strong></div>' +
+                '<div class="wh-row"><span class="wh-label">Instalada</span><strong>' + summary.counts['INSTALADA'] + '</strong><span class="wh-label">Rechazada</span><strong>' + summary.counts['RECHAZADA'] + '</strong></div>' +
+                '<div class="wh-row"><span class="wh-label">Req. contacto</span><strong>' + summary.counts['REQUIERE CONTACTO'] + '</strong><span class="wh-label">En proceso</span><strong>' + summary.counts['EN PROCESO DE VISITA'] + '</strong></div>' +
                 '<div class="wh-row"><span class="wh-label">Pendiente</span><strong>' + summary.counts['PENDIENTE'] + '</strong></div>';
         }
         function whInitToggles() {
@@ -1458,15 +1229,17 @@
                 json_XAL_POP_WH,
                 json_PDC_POP_WH
             ];
-            var grandTotal = 0, grandInstalled = 0, grandProcess = 0, grandPending = 0;
+            var grandTotal = 0, grandInstalled = 0, grandProcess = 0, grandPending = 0, grandRechazada = 0;
             allData.forEach(function(fc) {
                 var features = (fc && fc.features) ? fc.features : [];
                 features.forEach(function(f) {
-                    var s = whStatusKey(f.properties ? (f.properties['ESTATUS FINAL'] || f.properties['Estatus Final'] || '') : '');
+                    var raw = f.properties ? (f.properties['ESTATUS FINAL'] || f.properties['Estatus Final'] || '') : '';
+                    var s = whNormStatus(raw);
                     grandTotal++;
                     if (s === 'INSTALADA') grandInstalled++;
-                    else if (s === 'EN PROCESO' || s === 'EN PROCESO DE VISITA' || s === 'VISITADA') grandProcess++;
+                    else if (s === 'EN PROCESO DE VISITA') grandProcess++;
                     else if (s === 'PENDIENTE') grandPending++;
+                    else if (s === 'RECHAZADA') grandRechazada++;
                 });
             });
             var pct = grandTotal ? ((grandInstalled / grandTotal) * 100) : 0;
@@ -1477,7 +1250,8 @@
                 '<div class="wh-bar-stat"><span class="wh-bar-stat-num white">' + grandTotal.toLocaleString() + '</span><span class="wh-bar-stat-lbl">Total</span></div>' +
                 '<div class="wh-bar-stat"><span class="wh-bar-stat-num green">' + grandInstalled.toLocaleString() + '</span><span class="wh-bar-stat-lbl">Instaladas</span></div>' +
                 '<div class="wh-bar-stat"><span class="wh-bar-stat-num orange">' + grandProcess.toLocaleString() + '</span><span class="wh-bar-stat-lbl">En proceso</span></div>' +
-                '<div class="wh-bar-stat"><span class="wh-bar-stat-num red">' + grandPending.toLocaleString() + '</span><span class="wh-bar-stat-lbl">Pendiente</span></div>';
+                '<div class="wh-bar-stat"><span class="wh-bar-stat-num red">' + grandPending.toLocaleString() + '</span><span class="wh-bar-stat-lbl">Pendiente</span></div>' +
+                '<div class="wh-bar-stat"><span class="wh-bar-stat-num" style="color:#aaacac">' + grandRechazada.toLocaleString() + '</span><span class="wh-bar-stat-lbl">Rechazada</span></div>';
         })();
 
         whRender('wh-city-cdmx', whSummarize(json_CDMX_PROCESOOINSTALADAS_1));
