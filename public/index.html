@@ -188,7 +188,7 @@
         @media (max-width: 900px) {
             .wh-panel {
                 top: auto;
-                bottom: 10px;
+                bottom: 54px;
                 right: 10px;
                 width: 190px;
                 max-height: 55vh;
@@ -198,6 +198,114 @@
             }
             .wh-big-number {
                 font-size: 18px;
+            }
+        }
+
+        /* ── Barra de avance total México ── */
+        .wh-bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1100;
+            background: rgba(255,255,255,0.97);
+            color: #333;
+            padding: 8px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            box-shadow: 0 -2px 12px rgba(0,0,0,0.12);
+            border-top: 3px solid #EE6123;
+            min-height: 46px;
+        }
+        .wh-bottom-bar .wh-bar-flag {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .wh-bottom-bar .wh-bar-title {
+            font-weight: 700;
+            font-size: 13px;
+            white-space: nowrap;
+            flex-shrink: 0;
+            color: #EE6123;
+        }
+        .wh-bottom-bar .wh-bar-track {
+            flex: 1;
+            height: 14px;
+            background: rgba(0,0,0,0.06);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            min-width: 120px;
+        }
+        .wh-bottom-bar .wh-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #EE6123, #55d90f);
+            transition: width 0.8s ease;
+            position: relative;
+        }
+        .wh-bottom-bar .wh-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%);
+            animation: wh-shimmer 2.5s infinite;
+        }
+        @keyframes wh-shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .wh-bottom-bar .wh-bar-pct {
+            font-size: 18px;
+            font-weight: 800;
+            color: #EE6123;
+            flex-shrink: 0;
+            min-width: 56px;
+            text-align: right;
+        }
+        .wh-bottom-bar .wh-bar-stats {
+            display: flex;
+            gap: 14px;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+        .wh-bottom-bar .wh-bar-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            line-height: 1.2;
+        }
+        .wh-bottom-bar .wh-bar-stat-num {
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .wh-bottom-bar .wh-bar-stat-lbl {
+            opacity: 0.55;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #555;
+        }
+        .wh-bar-stat-num.green { color: #28a745; }
+        .wh-bar-stat-num.orange { color: #EE6123; }
+        .wh-bar-stat-num.red { color: #dc3545; }
+        .wh-bar-stat-num.white { color: #333; }
+        @media (max-width: 700px) {
+            .wh-bottom-bar {
+                padding: 6px 10px;
+                gap: 8px;
+                flex-wrap: wrap;
+            }
+            .wh-bottom-bar .wh-bar-stats {
+                display: none;
+            }
+            .wh-bottom-bar .wh-bar-title {
+                font-size: 11px;
+            }
+            .wh-bottom-bar .wh-bar-pct {
+                font-size: 15px;
             }
         }
 
@@ -262,6 +370,18 @@
         </div>
 
         </div>
+
+        <!-- Barra de avance total México -->
+        <div class="wh-bottom-bar" id="wh-bottom-bar">
+            <span class="wh-bar-flag">&#127474;&#127485;</span>
+            <span class="wh-bar-title">Avance Nacional MKT POP</span>
+            <div class="wh-bar-track">
+                <div class="wh-bar-fill" id="wh-bar-fill" style="width:0%"></div>
+            </div>
+            <span class="wh-bar-pct" id="wh-bar-pct">0%</span>
+            <div class="wh-bar-stats" id="wh-bar-stats"></div>
+        </div>
+
         <script src="js/qgis2web_expressions.js"></script>
         <script src="js/leaflet.js"></script>
         <script src="js/L.Control.Layers.Tree.min.js"></script>
@@ -1322,6 +1442,44 @@
                 });
             });
         }
+        // ── Barra de avance total México ──
+        (function() {
+            var allData = [
+                json_CDMX_PROCESOOINSTALADAS_1,
+                json_NORTH_POP_WH_MTY_2,
+                json_WEST_POP_GDL_WH_3,
+                json_PUE_POP_WH,
+                json_MER_POP_WH,
+                json_QRO_POP_WH,
+                json_VER_POP_WH,
+                json_CUE_POP_WH,
+                json_CAN_POP_WH,
+                json_PAC_POP_WH,
+                json_XAL_POP_WH,
+                json_PDC_POP_WH
+            ];
+            var grandTotal = 0, grandInstalled = 0, grandProcess = 0, grandPending = 0;
+            allData.forEach(function(fc) {
+                var features = (fc && fc.features) ? fc.features : [];
+                features.forEach(function(f) {
+                    var s = whStatusKey(f.properties ? (f.properties['ESTATUS FINAL'] || f.properties['Estatus Final'] || '') : '');
+                    grandTotal++;
+                    if (s === 'INSTALADA') grandInstalled++;
+                    else if (s === 'EN PROCESO' || s === 'EN PROCESO DE VISITA' || s === 'VISITADA') grandProcess++;
+                    else if (s === 'PENDIENTE') grandPending++;
+                });
+            });
+            var pct = grandTotal ? ((grandInstalled / grandTotal) * 100) : 0;
+            document.getElementById('wh-bar-fill').style.width = pct.toFixed(1) + '%';
+            document.getElementById('wh-bar-pct').textContent = pct.toFixed(1) + '%';
+            var statsEl = document.getElementById('wh-bar-stats');
+            statsEl.innerHTML =
+                '<div class="wh-bar-stat"><span class="wh-bar-stat-num white">' + grandTotal.toLocaleString() + '</span><span class="wh-bar-stat-lbl">Total</span></div>' +
+                '<div class="wh-bar-stat"><span class="wh-bar-stat-num green">' + grandInstalled.toLocaleString() + '</span><span class="wh-bar-stat-lbl">Instaladas</span></div>' +
+                '<div class="wh-bar-stat"><span class="wh-bar-stat-num orange">' + grandProcess.toLocaleString() + '</span><span class="wh-bar-stat-lbl">En proceso</span></div>' +
+                '<div class="wh-bar-stat"><span class="wh-bar-stat-num red">' + grandPending.toLocaleString() + '</span><span class="wh-bar-stat-lbl">Pendiente</span></div>';
+        })();
+
         whRender('wh-city-cdmx', whSummarize(json_CDMX_PROCESOOINSTALADAS_1));
         whRender('wh-city-mty', whSummarize(json_NORTH_POP_WH_MTY_2));
         whRender('wh-city-gdl', whSummarize(json_WEST_POP_GDL_WH_3));
