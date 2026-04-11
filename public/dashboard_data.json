@@ -1,16 +1,16 @@
 {
-  "actualizado": "2026-04-10T17:47:48.100349",
+  "actualizado": "2026-04-10T21:27:37.973817",
   "regiones": {
     "CDMX": {
       "total": 20152,
-      "instaladas": 3905,
-      "pct_instalada": 19.4,
+      "instaladas": 3964,
+      "pct_instalada": 19.7,
       "por_estatus": {
-        "PENDIENTE": 10877,
-        "INSTALADA": 3905,
-        "NO ACEPTO": 2569,
-        "REQUIERE CONTACTO": 1948,
-        "EN PROCESO": 658,
+        "PENDIENTE": 10746,
+        "INSTALADA": 3964,
+        "NO ACEPTO": 2649,
+        "REQUIERE CONTACTO": 1946,
+        "EN PROCESO": 652,
         "YA NO EXISTE": 183,
         "VISITADA": 12
       }
