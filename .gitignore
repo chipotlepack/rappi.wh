@@ -60,3 +60,9 @@ Reportes/*.csv
 4.Qgis/
 Rutas/
 
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
