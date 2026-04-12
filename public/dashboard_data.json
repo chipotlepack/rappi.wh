@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-04-12T11:03:43.102977",
+  "actualizado": "2026-04-12T13:27:32.245242",
   "regiones": {
     "CDMX": {
       "total": 20152,
@@ -8,10 +8,10 @@
       "por_estatus": {
         "PENDIENTE": 10745,
         "INSTALADA": 3964,
-        "NO ACEPTO": 2651,
+        "NO ACEPTO": 2652,
         "REQUIERE CONTACTO": 1946,
         "EN PROCESO": 651,
-        "YA NO EXISTE": 183,
+        "YA NO EXISTE": 182,
         "VISITADA": 12
       }
     },
