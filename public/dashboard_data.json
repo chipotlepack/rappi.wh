@@ -1,17 +1,16 @@
 {
-  "actualizado": "2026-04-13T13:27:34.100352",
+  "actualizado": "2026-04-13T17:27:38.932009",
   "regiones": {
     "CDMX": {
       "total": 20152,
       "instaladas": 3964,
       "pct_instalada": 19.7,
       "por_estatus": {
-        "PENDIENTE": 10746,
+        "PENDIENTE": 10748,
         "INSTALADA": 3964,
-        "NO ACEPTO": 2833,
+        "NO ACEPTO": 2843,
         "REQUIERE CONTACTO": 1946,
-        "EN PROCESO": 651,
-        "VISITADA": 12
+        "EN PROCESO": 651
       }
     },
     "GDL": {
@@ -37,11 +36,11 @@
     },
     "MER": {
       "total": 2578,
-      "instaladas": 325,
+      "instaladas": 326,
       "pct_instalada": 12.6,
       "por_estatus": {
-        "PENDIENTE": 2189,
-        "INSTALADA": 325,
+        "PENDIENTE": 2188,
+        "INSTALADA": 326,
         "NO ACEPTO": 64
       }
     },
@@ -141,6 +140,12 @@
     },
     {
       "region": "CDMX",
+      "store_id": "1930268704",
+      "negocio": "Romanos Pizza Authentic Ny",
+      "comentario": "Telefono del aliado 5585822427"
+    },
+    {
+      "region": "CDMX",
       "store_id": "1923218520",
       "negocio": "Los Tulipanes",
       "comentario": "El aliado me comenta que por el momento no quiere meter promocion visual en las sucursales (es el dueño)"
@@ -197,7 +202,7 @@
       "region": "CDMX",
       "store_id": "1306706884",
       "negocio": "Tandoor",
-      "comentario": "Cero contacto. "
+      "comentario": "Telefono del aliado 5516446486"
     },
     {
       "region": "CDMX",
@@ -222,12 +227,6 @@
       "store_id": "1923270287",
       "negocio": "Sushi Roll",
       "comentario": "En proceso de autorización"
-    },
-    {
-      "region": "CDMX",
-      "store_id": "1923221098",
-      "negocio": "Doña Lula",
-      "comentario": "Imposible Contacto"
     },
     {
       "region": "GDL",
