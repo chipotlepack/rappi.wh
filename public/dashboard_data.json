@@ -1,5 +1,5 @@
 {
-  "actualizado": "2026-04-14T14:21:46.370955",
+  "actualizado": "2026-04-14T17:27:28.732154",
   "regiones": {
     "CDMX": {
       "total": 20152,
@@ -356,57 +356,57 @@
     },
     {
       "region": "PUE",
-      "store_id": "1930112193",
-      "negocio": "Sushi Izakaya - Puebla",
-      "comentario": "por definir"
+      "store_id": "1930273257",
+      "negocio": "Bubble Drink",
+      "comentario": "No asignado en farmer mass"
     },
     {
       "region": "PUE",
-      "store_id": "1923798758",
-      "negocio": "Wok + Wok",
-      "comentario": "Eva Manzo"
+      "store_id": "1930274741",
+      "negocio": "Fredosburger",
+      "comentario": "No asignado en farmer mass"
     },
     {
       "region": "PUE",
-      "store_id": "1923799787",
-      "negocio": "Taquería la Oriental",
-      "comentario": "Imposible contacto se deja mensaje "
+      "store_id": "1930263636",
+      "negocio": "Fika Drycker Kaffe",
+      "comentario": "No asignado en farmer mass"
     },
     {
       "region": "PUE",
-      "store_id": "1930376943",
-      "negocio": "Gato Glotón",
-      "comentario": "en conversacion "
+      "store_id": "1930272283",
+      "negocio": "Cemitas la Chamaquita",
+      "comentario": "No asignado en farmer mass"
     },
     {
       "region": "PUE",
-      "store_id": "1930379214",
-      "negocio": "el Sazón de Las Abuelitas",
-      "comentario": "no hay comunicacion con el encargado"
+      "store_id": "1930236881",
+      "negocio": "Cinco Tazas",
+      "comentario": "No asignado en farmer mass"
     },
     {
       "region": "PUE",
-      "store_id": "1930380218",
-      "negocio": "Sugar Pop Cakery",
-      "comentario": "no esta interesado"
+      "store_id": "1930255586",
+      "negocio": "Alitas Mania Puebla",
+      "comentario": "No asignado en farmer mass"
     },
     {
       "region": "PUE",
-      "store_id": "1930312674",
-      "negocio": "Desayunos y Comidas Don Barbas",
-      "comentario": "Imposible contacto "
+      "store_id": "1930270006",
+      "negocio": "Pollo Las Brasas Suc Puebla",
+      "comentario": "No asignado en farmer mass"
     },
     {
       "region": "PUE",
-      "store_id": "1923327998",
-      "negocio": "Rosies Burger Suc La Paz",
-      "comentario": "sergio"
+      "store_id": "1930276543",
+      "negocio": "The Foc",
+      "comentario": "No asignado en farmer mass"
     },
     {
       "region": "PUE",
-      "store_id": "1923465390",
-      "negocio": "la Memela Dorada",
-      "comentario": "orli"
+      "store_id": "1923259180",
+      "negocio": "Pizzería Daysi",
+      "comentario": "No asignado en farmer mass"
     }
   ]
 }
